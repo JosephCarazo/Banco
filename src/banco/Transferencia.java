@@ -9,5 +9,9 @@ package banco;
  * @author joans
  */
 public class Transferencia extends Transaccion {
+
+    public Transferencia(int id, String cuenta, double monto, double saldoAnterior) {
+        super(id, cuenta, monto, saldoAnterior);
+    }
  
 }
