@@ -9,5 +9,13 @@ package banco;
  * @author joans
  */
 public class CuentaColones extends Cuenta {
+
+    public CuentaColones(String numeroCuenta, double saldo) {
+        super(numeroCuenta, saldo);
+        
+    }
+
+
+   
     
 }

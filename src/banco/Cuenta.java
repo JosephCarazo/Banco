@@ -12,6 +12,11 @@ public class Cuenta {
    protected String numeroCuenta;
    protected double saldo;
 
+    public Cuenta(String numeroCuenta, double saldo) {
+        this.numeroCuenta = numeroCuenta;
+        this.saldo = saldo;
+    }
+
     public String getNumeroCuenta() {
         return numeroCuenta;
     }
@@ -25,7 +30,11 @@ public class Cuenta {
     }
 
     public void setSaldo(double saldo) {
-        this.saldo = saldo;
+       if(saldo>0){
+       this.saldo += saldo;
+       } else{
+           System.out.println("No es un numero positivo");
+       }
     }
    
   

@@ -18,6 +18,8 @@ public abstract class Transaccion {
     protected double saldoFinal;
     protected String fechaHora;
 
+    
+    //ESTE CONSTRUCTOR SE UTILIZA PARA TRANSFERENCIA ENTRE CUENTAS(POR ELLOS DOS CUENTAS)
     public Transaccion(Cuenta c1,Cuenta c2,int id, String cuenta, double monto, double saldoAnterior) {
         this.id = id;
         this.cuenta = cuenta;
@@ -26,7 +28,15 @@ public abstract class Transaccion {
         this.fechaHora = String.valueOf(LocalDateTime.now());
         
     }
-    
+    //ESTE CONSTRUCTOR ES PARA RETIROS Y DEPOSITO
+     public Transaccion(Cuenta c1,int id, String cuenta, double monto, double saldoAnterior) {
+        this.id = id;
+        this.cuenta = cuenta;
+        this.monto = monto;
+        this.saldoAnterior = saldoAnterior;
+        this.fechaHora = String.valueOf(LocalDateTime.now());
+        
+    }
     
     
     

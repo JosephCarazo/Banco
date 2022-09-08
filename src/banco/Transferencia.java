@@ -10,8 +10,8 @@ package banco;
  */
 public class Transferencia extends Transaccion {
 
-    public Transferencia(int id, String cuenta, double monto, double saldoAnterior) {
-        super(id, cuenta, monto, saldoAnterior);
+    public Transferencia(Cuenta c1,Cuenta c2,int id, String cuenta, double monto, double saldoAnterior) {
+        super(c1,c2,id, cuenta, monto, saldoAnterior);
     }
  
 }
