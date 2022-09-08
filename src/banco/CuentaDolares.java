@@ -10,4 +10,18 @@ package banco;
  */
 public class CuentaDolares extends Cuenta {
     private static double tipoCambio;
+
+    public CuentaDolares(String numeroCuenta, double saldo) {
+        super(numeroCuenta, saldo);
+        tipoCambio=680;
+    }
+    
+    private void ColonesADolares(double saldo){///EN CASO DE RETIRAR DOLARES A COLONES
+    double dolares=saldo/tipoCambio;
+    restarDolares(dolares);//METODO PRIVADO PARA RESTAR DOLARES 
+    }
+    private void restarDolares(double dolares){
+    this.saldo-=dolares;
+    }
+    
 }
