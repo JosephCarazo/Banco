@@ -14,4 +14,12 @@ public class Transferencia extends Transaccion {
         super(c1,c2,id, cuenta, monto, saldoAnterior);
     }
  
+    public void tranferencia(Cuenta c1, Cuenta c2, double monto){
+        if (c1.getSaldo() < monto) {
+            System.out.println("Saldo insuficiente");
+        }else{
+            c2.setSaldo(c2.getSaldo() + monto);
+            c1.setSaldo(c1.getSaldo() - monto);
+        }
+    }
 }
