@@ -30,11 +30,11 @@ public class Cuenta {
     }
 
     public void setSaldo(double saldo) {
-       if(saldo>0){
-       this.saldo += saldo;
-       } else{
-           System.out.println("No es un numero positivo");
-       }
+        if (this.saldo < 0) {
+            this.saldo = 0;
+        }else{
+            this.saldo = saldo;
+        }
     }
    
   
