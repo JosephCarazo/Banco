@@ -18,12 +18,13 @@ public abstract class Transaccion {
     protected double saldoFinal;
     protected String fechaHora;
 
-    public Transaccion(int id, String cuenta, double monto, double saldoAnterior) {
+    public Transaccion(Cuenta c1,Cuenta c2,int id, String cuenta, double monto, double saldoAnterior) {
         this.id = id;
         this.cuenta = cuenta;
         this.monto = monto;
         this.saldoAnterior = saldoAnterior;
         this.fechaHora = String.valueOf(LocalDateTime.now());
+        
     }
     
     
