@@ -13,48 +13,50 @@ import java.util.Scanner;
  */
 public class Banco {
 
-    ArrayList<Cuenta> cuentas = new ArrayList<>();
-    ArrayList<Cliente> cliente = new ArrayList<>();
+    private static ArrayList<Cuenta> cuentas = new ArrayList<>();
+    private static ArrayList<Cliente> cliente = new ArrayList<>();
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        Scanner leer = new Scanner(System.in);
-//
-//        System.out.println("*** BIENVENIDO A BANCO UTN ***");
-//        menu();
-//        int opcion = leer.nextInt();
-//        switch (opcion) {
-//            case 1:
-//            case 2:
-//            case 3:
-//            default:
-//                System.out.println("Digite una opcion correcta");
-//        }
+        Scanner leer = new Scanner(System.in);
+
+        System.out.println("*** BIENVENIDO A BANCO UTN ***");
         nuevoCliente();
+        menu();
+        int opcion = leer.nextInt();
+        switch (opcion) {
+            case 1:
+            case 2:
+            case 3:
+            default:
+                System.out.println("Digite una opcion correcta");
+        }
     }
 
     public static void menu() {
         System.out.println("Seleccione la opcion que desea realizar: \n1- Crear una cuenta\n2- Deposito\n3- Retiro \n4- Transferencia");
     }
 
+    //ESTE METODO AÑADE UN NUEVO CLIENTE
     public static void nuevoCliente() {
-        Scanner leer = new Scanner(System.in);
         Cliente cl = new Cliente();
-        int dia, mes, annio;
-        String diaString = "", mesString = "", annioString = "";
         System.out.println("Por favor, digite los siguientes datos");
-        pedirNombre(cl, leer);
-//        pedirFechaNac(cl, leer);
-//        pedirCorreo(cl, leer);
+        pedirNombre(cl);
+        pedirFechaNac(cl);
+        pedirCorreo(cl);
+        cliente.add(cl);
     }
 
+    //ESTE METODO MUESTRA UN MENSAJE DE ERROR
     public static void error() {
         System.out.println("*****  ERROR  ******\nDato no valido\n********************");
     }
 
-    public static void pedirFechaNac(Cliente cliente, Scanner leer) {
+    //ESTE METODO SOLICITA LA FECHA EN EL FORMATO ESTABLECIDO
+    public static void pedirFechaNac(Cliente cliente) {
+        Scanner leer = new Scanner(System.in);
         int dia, mes, annio;
         String diaString = "", mesString = "", annioString = "";
         do {
@@ -95,7 +97,9 @@ public class Banco {
         cliente.setFechaNacimiento(fechaNac);
     }
 
-    public static void pedirNombre(Cliente cliente, Scanner leer) {
+    //CON ESTE METODO AÑADIMOS UN NOMBRE
+    public static void pedirNombre(Cliente cliente) {
+        Scanner leer = new Scanner(System.in);
         System.out.print("Digite su nombre: ");
         String nombre = leer.next();
         System.out.print("Digite su primer apellido: ");
@@ -104,10 +108,11 @@ public class Banco {
         String apellido2 = leer.next();
         String nombreCompleto = nombre + " " + apellido1 + " " + apellido2;
         cliente.setNombre(nombreCompleto);
-        System.out.println(nombreCompleto);
     }
 
-    public static void pedirNumero(Cliente cliente, Scanner leer) {
+    //CON ESTE METODO SOLICITAMOS EL NUMERO DE TELEFONO, ESTA INFORMACION ES OPCIONAL
+    public static void pedirNumero(Cliente cliente) {
+        Scanner leer = new Scanner(System.in);
         System.out.println("\nDigite su numero (Opcional)\nSi desea saltar esta opcion digite 1");
         String numero = leer.next();
         if (numero == "1") {
@@ -115,8 +120,9 @@ public class Banco {
         }
         cliente.setTelefono(numero);
     }
-
-    public static void pedirCorreo(Cliente cliente, Scanner leer) {
+    //CON ESTE METODO SOLICITAMOS EL CORREO ELECTRONICO, ESTA INFORMACION ES OPCIONAL
+    public static void pedirCorreo(Cliente cliente) {
+        Scanner leer = new Scanner(System.in);
         System.out.println("\nDigite su correo electronico (Opcional)\nSi desea saltar esta opcion digite 1");
         String correo = leer.next();
         if (correo == "1") {
