@@ -21,8 +21,8 @@ public class CuentaDolares extends Cuenta {
     restarDolares(dolares);//METODO PRIVADO PARA RESTAR DOLARES 
     }
     public void depositarColonesADolares(double saldo){
-    double dolares=saldo/tipoCambio;
-    sumarDolares(dolares);//METODO PRIVADO PARA RESTAR DOLARES 
+    double dolares=saldo/tipoCambio;//CONVIERTE DE COLONES A DOLARES
+    sumarDolares(dolares);//METODO PRIVADO PARA SUMAR DOLARES 
     }
     private void restarDolares(double dolares){
     this.saldo-=dolares;
