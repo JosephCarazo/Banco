@@ -16,11 +16,18 @@ public class CuentaDolares extends Cuenta {
         tipoCambio=680;
     }
     
-    private void ColonesADolares(double saldo){///EN CASO DE RETIRAR DOLARES A COLONES
+    public void RetirarColonesADolares(double saldo){///EN CASO DE RETIRAR COLONES A DOLARES
     double dolares=saldo/tipoCambio;
     restarDolares(dolares);//METODO PRIVADO PARA RESTAR DOLARES 
     }
+    public void depositarColonesADolares(double saldo){
+    double dolares=saldo/tipoCambio;
+    sumarDolares(dolares);//METODO PRIVADO PARA RESTAR DOLARES 
+    }
     private void restarDolares(double dolares){
+    this.saldo-=dolares;
+    }
+    private void sumarDolares(double dolares){
     this.saldo-=dolares;
     }
     
