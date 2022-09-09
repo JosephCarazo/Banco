@@ -5,6 +5,7 @@
 package banco;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -12,14 +13,35 @@ import java.util.Scanner;
  * @author joans
  */
 public class Banco {
-
+    private static String nCuenta;
     private static ArrayList<Cuenta> cuentas = new ArrayList<>();
+    //metodo para crear cuenta
+    public static void crearCuenta(){
+        Scanner leer = new Scanner(System.in);
+        Cuenta c=new Cuenta();
+         Random r=new Random();
+        long dig16 = r.nextLong(9000000000000000L)+1000000000000000L;
+         nCuenta= String.valueOf(dig16);
+         c.setNumeroCuenta(nCuenta);
+         System.out.println("Ingrese el monto inicial de la cuenta");
+         double saldo=leer.nextDouble();
+         c.setSaldo(saldo);
+         
+         System.out.println("Numero Cuenta= "+c.getNumeroCuenta());
+         System.out.println("saldo Disponible= "+c.getSaldo());
+        
+        
+    }
+ 
     private static ArrayList<Cliente> cliente = new ArrayList<>();
+    
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        
         Scanner leer = new Scanner(System.in);
 
         System.out.println("*** BIENVENIDO A BANCO UTN ***");
@@ -27,12 +49,14 @@ public class Banco {
         menu();
         int opcion = leer.nextInt();
         switch (opcion) {
-            case 1:
+            case 1:crearCuenta();
             case 2:
             case 3:
             default:
                 System.out.println("Digite una opcion correcta");
         }
+        // Para crear cuenta
+        
     }
 
     public static void menu() {
