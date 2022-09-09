@@ -20,6 +20,7 @@ public class Transferencia extends Transaccion {
         }else{
             c2.setSaldo(c2.getSaldo() + monto);
             c1.setSaldo(c1.getSaldo() - monto);
+            System.out.println("Transferencia exitosa entre la cuenta "+c1.getNumeroCuenta()+" y la cuenta "+c2.getNumeroCuenta());
         }
     }
 }

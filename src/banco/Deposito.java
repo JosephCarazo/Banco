@@ -10,11 +10,11 @@ package banco;
  */
 public class Deposito extends Transaccion {
 
-    public Deposito(Cuenta c1,int id, String cuenta, double monto, double saldoAnterior) {
-        super(c1,id, cuenta, monto, saldoAnterior);
+    public Deposito(Cuenta c1,int id, double monto) {
+        super(c1,id, monto);
         deposito(c1,monto);
     }
      private void deposito(Cuenta c1,double monto){
-     c1.setSaldo(monto);
+     c1.setSaldo(c1.getSaldo()+monto);
      }
 }

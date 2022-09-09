@@ -10,8 +10,9 @@ package banco;
  */
 public class Retiro extends Transaccion {
 
-    public Retiro(Cuenta c1,int id, String cuenta, double monto, double saldoAnterior) {
-        super(c1,id, cuenta, monto, saldoAnterior);
+    public Retiro(Cuenta c1,int id, double monto) {
+        super(c1,id, monto);
+        this.saldoFinal=c1.getSaldo()-monto;
         Retiro(c1,monto);
     }
     private void Retiro(Cuenta c1 ,double monto){
