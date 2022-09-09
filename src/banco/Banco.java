@@ -13,54 +13,27 @@ import java.util.Scanner;
  * @author joans
  */
 public class Banco {
-    private static String nCuenta;
+
     private static ArrayList<Cuenta> cuentas = new ArrayList<>();
-    //metodo para crear cuenta
-    public static void crearCuenta(){
-        Scanner leer = new Scanner(System.in);
-        Cuenta c=new Cuenta();
-         Random r=new Random();
-        long dig16 = r.nextLong(9000000000000000L)+1000000000000000L;
-         nCuenta= String.valueOf(dig16);
-         c.setNumeroCuenta(nCuenta);
-         System.out.println("Ingrese el monto inicial de la cuenta");
-         double saldo=leer.nextDouble();
-         c.setSaldo(saldo);
-         
-         System.out.println("Numero Cuenta= "+c.getNumeroCuenta());
-         System.out.println("saldo Disponible= "+c.getSaldo());
-        
-        
-    }
- 
     private static ArrayList<Cliente> cliente = new ArrayList<>();
-    
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        
-        
-        Scanner leer = new Scanner(System.in);
-
-        System.out.println("*** BIENVENIDO A BANCO UTN ***");
-        nuevoCliente();
-        menu();
-        int opcion = leer.nextInt();
-        switch (opcion) {
-            case 1:crearCuenta();
-            case 2:
-            case 3:
-            default:
-                System.out.println("Digite una opcion correcta");
-        }
-        // Para crear cuenta
-        
-    }
 
     public static void menu() {
-        System.out.println("Seleccione la opcion que desea realizar: \n1- Crear una cuenta\n2- Deposito\n3- Retiro \n4- Transferencia");
+        System.out.println("Bienvenido. Seleccione la opcion que desea realizar: \n1- Crear una cuenta\n2- Deposito\n3- Retiro\n4- Transferencia\n5- Salir");
+    }
+
+    //metodo para crear cuenta
+    public static void crearCuenta() {
+        Scanner leer = new Scanner(System.in);
+        Cuenta c = new Cuenta();
+        Random r = new Random();
+        long dig16 = r.nextLong(9000000000000000L) + 1000000000000000L;
+        String nCuenta = String.valueOf(dig16);
+        c.setNumeroCuenta(nCuenta);
+        System.out.println("Ingrese el monto inicial de la cuenta");
+        double saldo = leer.nextDouble();
+        c.setSaldo(saldo);
+        System.out.println("Numero Cuenta= " + c.getNumeroCuenta());
+        System.out.println("Saldo Disponible= " + c.getSaldo());
     }
 
     //ESTE METODO AÑADE UN NUEVO CLIENTE
@@ -69,8 +42,11 @@ public class Banco {
         System.out.println("Por favor, digite los siguientes datos");
         pedirNombre(cl);
         pedirFechaNac(cl);
+        pedirNumero(cl);
         pedirCorreo(cl);
         cliente.add(cl);
+        System.out.println("Sus datos:\nCedula: " + cl.getCedula() + "\nNombre: " + cl.getNombre() + "\nFecha de nacimiento: " + cl.getFechaNacimiento()
+        + "\nTelefono: " + cl.getTelefono() + "\nCorreo: " + cl.getCorreo());
     }
 
     //ESTE METODO MUESTRA UN MENSAJE DE ERROR
@@ -117,8 +93,7 @@ public class Banco {
             }
             annioString = String.valueOf(annio);
         } while (annio < 1800 || annio > 2022);
-        String fechaNac = diaString + "/" + mesString + "/" + annioString;
-        cliente.setFechaNacimiento(fechaNac);
+        cliente.setFechaNacimiento(diaString + "/" + mesString + "/" + annioString);
     }
 
     //CON ESTE METODO AÑADIMOS UN NOMBRE
@@ -139,19 +114,49 @@ public class Banco {
         Scanner leer = new Scanner(System.in);
         System.out.println("\nDigite su numero (Opcional)\nSi desea saltar esta opcion digite 1");
         String numero = leer.next();
-        if (numero == "1") {
+        if ("1".equals(numero)) {
             numero = null;
         }
         cliente.setTelefono(numero);
     }
+
     //CON ESTE METODO SOLICITAMOS EL CORREO ELECTRONICO, ESTA INFORMACION ES OPCIONAL
     public static void pedirCorreo(Cliente cliente) {
         Scanner leer = new Scanner(System.in);
         System.out.println("\nDigite su correo electronico (Opcional)\nSi desea saltar esta opcion digite 1");
         String correo = leer.next();
-        if (correo == "1") {
+        if ("1".equals(correo)) {
             correo = null;
         }
         cliente.setCorreo(correo);
     }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Scanner leer = new Scanner(System.in);
+
+        System.out.println("*** BIENVENIDO A BANCO UTN ***");
+        nuevoCliente();
+        menu();
+        int opcion = leer.nextInt();
+        switch (opcion) {
+            case 1:
+                crearCuenta();
+            case 2:
+                //DEPOSITO
+            case 3:
+                //RETIRO
+            case 4:
+                //TRANSFERENCIA
+            case 5: 
+                break;
+            default:
+                System.out.println("Digite una opcion correcta");
+        }
+        // Para crear cuenta
+
+    }
+
 }

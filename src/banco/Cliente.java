@@ -20,6 +20,10 @@ public class Cliente {
     private String telefono;
     private String correo;
 
+    public int getCedula() {
+        return cedula;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -61,7 +65,7 @@ public class Cliente {
     }
 
     public Cliente() {
-        this(000000000, "Usuario", "23/05/2003", null, null);
+        this(000000000, "Usuario", null, null, null);
     }
 
     public void generarCedula() {
@@ -78,6 +82,7 @@ public class Cliente {
         System.out.printf("%s anios", periodo.getYears()); System.out.println("");
     }
 
+    
     @Override
     public String toString() {
         return "Cliente" + "\nCedula: " + cedula + "\nNombre: " + nombre + "\nEdad: " + fechaNacimiento + "\nTelefono: " + telefono + "\nCorreo: " + correo;
