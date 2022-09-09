@@ -19,12 +19,11 @@ public class Banco {
 
     public static void menuPrincipal() {
         Scanner leer = new Scanner(System.in);
-        int op = 0;
         System.out.println("*** BIENVENIDO A BANCO UTN ***");
         System.out.println("Seleccione un tema");
-        System.out.println("1- Cliente \n2- Cuentaa \n3- Ttransacciones\n4- Salir");
+        System.out.println("1- Cliente \n2- Cuenta\n3- Transacciones\n4- Salir");
         int opcion = leer.nextInt();
-        switch (op) {
+        switch (opcion) {
             case 1:
                 menuClientes();
             case 2:
@@ -49,7 +48,10 @@ public class Banco {
                 nuevoCliente();
                 menuPrincipal();
             case 2:
-                
+                System.out.println("Digite la cedula del cliente que desea buscar");
+                int cedula = leer.nextInt();
+                buscarCliente();
+                menuPrincipal();
         }
     }
     public static void menuTranferencias() {
@@ -94,11 +96,6 @@ public class Banco {
         cliente.add(cl);
         System.out.println("**********************\nSus datos:\nCedula: " + cl.getCedula() + "\nNombre: " + cl.getNombre()
                 + "\nFecha de nacimiento: " + cl.getFechaNacimiento() + "\nTelefono: " + cl.getTelefono() + "\nCorreo: " + cl.getCorreo() + "\n**********************");
-    }
-
-    //ESTE METODO MUESTRA UN MENSAJE DE ERROR
-    public static void error() {
-        System.out.println("*****  ERROR  ******\nDato no valido\n********************");
     }
 
     //ESTE METODO SOLICITA LA FECHA EN EL FORMATO ESTABLECIDO
@@ -177,7 +174,19 @@ public class Banco {
         }
         cliente.setCorreo(correo);
     }
+    
+    public static void buscarCliente(){
+//        if (cedula == ) {
+//            System.out.println("La persona con cedula " + cedula + " si es un cliente);
+//        }else{
+//            System.out.println("La persona con cedula " + cedula + " no es un cliente.");
+//        }
+    }
 
+    //ESTE METODO MUESTRA UN MENSAJE DE ERROR
+    public static void error() {
+        System.out.println("*****  ERROR  ******\nDato no valido\n********************");
+    }
     /**
      * @param args the command line arguments
      */
