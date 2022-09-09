@@ -17,8 +17,45 @@ public class Banco {
     private static ArrayList<Cuenta> cuentas = new ArrayList<>();
     private static ArrayList<Cliente> cliente = new ArrayList<>();
 
-    public static void menu() {
-        System.out.println("Bienvenido. Seleccione la opcion que desea realizar: \n1- Crear una cuenta\n2- Deposito\n3- Retiro\n4- Transferencia\n5- Salir");
+    public static void menuPrincipal() {
+        Scanner leer = new Scanner(System.in);
+        int opcion2 = 0;
+        System.out.println("*** BIENVENIDO A BANCO UTN ***");
+        System.out.println("Digite la opcion que desea realizar");
+        System.out.println("1- Nuevo cliente \n2- Crear cuenta \n3- Realizar alguna transaccion\n4- Salir");
+        int opcion = leer.nextInt();
+        switch (opcion) {
+            case 1:
+                nuevoCliente();
+                menuPrincipal();
+            case 2:
+                crearCuenta();
+                menuPrincipal();
+            case 3:
+                menuTranferencias();
+                menuPrincipal();
+            case 4:
+                break;
+            default:
+                System.out.println("Digite una opcion correcta");
+                menuPrincipal();
+        }
+    }
+
+    public static void menuTranferencias() {
+        Scanner leer = new Scanner(System.in);
+        System.out.println("Digite que tipo de transaccion desea hacer\n1- Deposito\n2- Retiro\n3- Transferencia\n4- Salir");
+        int transaccion = leer.nextInt();
+        switch (transaccion) {
+            case 1:
+            //DEPOSITO
+            case 2:
+            //RETIRO
+            case 3:
+            //TRANSFERENCIA
+            case 4:
+                menuPrincipal();
+        }
     }
 
     //metodo para crear cuenta
@@ -45,8 +82,8 @@ public class Banco {
         pedirNumero(cl);
         pedirCorreo(cl);
         cliente.add(cl);
-        System.out.println("Sus datos:\nCedula: " + cl.getCedula() + "\nNombre: " + cl.getNombre() + "\nFecha de nacimiento: " + cl.getFechaNacimiento()
-        + "\nTelefono: " + cl.getTelefono() + "\nCorreo: " + cl.getCorreo());
+        System.out.println("**********************\nSus datos:\nCedula: " + cl.getCedula() + "\nNombre: " + cl.getNombre()
+                + "\nFecha de nacimiento: " + cl.getFechaNacimiento() + "\nTelefono: " + cl.getTelefono() + "\nCorreo: " + cl.getCorreo() + "\n**********************");
     }
 
     //ESTE METODO MUESTRA UN MENSAJE DE ERROR
@@ -135,28 +172,6 @@ public class Banco {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Scanner leer = new Scanner(System.in);
-
-        System.out.println("*** BIENVENIDO A BANCO UTN ***");
-        nuevoCliente();
-        menu();
-        int opcion = leer.nextInt();
-        switch (opcion) {
-            case 1:
-                crearCuenta();
-            case 2:
-                //DEPOSITO
-            case 3:
-                //RETIRO
-            case 4:
-                //TRANSFERENCIA
-            case 5: 
-                break;
-            default:
-                System.out.println("Digite una opcion correcta");
-        }
-        // Para crear cuenta
-
+        menuPrincipal();
     }
-
 }
