@@ -19,15 +19,14 @@ public class Banco {
 
     public static void menuPrincipal() {
         Scanner leer = new Scanner(System.in);
-        int opcion2 = 0;
+        int op = 0;
         System.out.println("*** BIENVENIDO A BANCO UTN ***");
-        System.out.println("Digite la opcion que desea realizar");
-        System.out.println("1- Nuevo cliente \n2- Crear cuenta \n3- Realizar alguna transaccion\n4- Salir");
+        System.out.println("Seleccione un tema");
+        System.out.println("1- Cliente \n2- Cuentaa \n3- Ttransacciones\n4- Salir");
         int opcion = leer.nextInt();
-        switch (opcion) {
+        switch (op) {
             case 1:
-                nuevoCliente();
-                menuPrincipal();
+                menuClientes();
             case 2:
                 crearCuenta();
                 menuPrincipal();
@@ -41,7 +40,18 @@ public class Banco {
                 menuPrincipal();
         }
     }
-
+    public static void menuClientes(){
+        Scanner leer = new Scanner(System.in);
+        System.out.println("Digite una opcion\n1- Crear nuevo cliente\n2- Buscar cliente");
+        int op = leer.nextInt();
+        switch (op) {
+            case 1:
+                nuevoCliente();
+                menuPrincipal();
+            case 2:
+                
+        }
+    }
     public static void menuTranferencias() {
         Scanner leer = new Scanner(System.in);
         System.out.println("Digite que tipo de transaccion desea hacer\n1- Deposito\n2- Retiro\n3- Transferencia\n4- Salir");
