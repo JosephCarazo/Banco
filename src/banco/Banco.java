@@ -39,7 +39,8 @@ public class Banco {
                 menuPrincipal();
         }
     }
-    public static void menuClientes(){
+
+    public static void menuClientes() {
         Scanner leer = new Scanner(System.in);
         System.out.println("Digite una opcion\n1- Crear nuevo cliente\n2- Buscar cliente");
         int op = leer.nextInt();
@@ -54,6 +55,7 @@ public class Banco {
                 menuPrincipal();
         }
     }
+
     public static void menuTranferencias() {
         Scanner leer = new Scanner(System.in);
         System.out.println("Digite que tipo de transaccion desea hacer\n1- Deposito\n2- Retiro\n3- Transferencia\n4- Salir");
@@ -89,7 +91,8 @@ public class Banco {
     public static void nuevoCliente() {
         Cliente cl = new Cliente();
         System.out.println("Por favor, digite los siguientes datos");
-        pedirNombre(cl);
+        pedirCedula(c1);
+        rellenarNombre(cl);
         pedirFechaNac(cl);
         pedirNumero(cl);
         pedirCorreo(cl);
@@ -97,7 +100,16 @@ public class Banco {
         System.out.println("**********************\nSus datos:\nCedula: " + cl.getCedula() + "\nNombre: " + cl.getNombre()
                 + "\nFecha de nacimiento: " + cl.getFechaNacimiento() + "\nTelefono: " + cl.getTelefono() + "\nCorreo: " + cl.getCorreo() + "\n**********************");
     }
-
+    
+public static void pedirCedula(Cliente cliente){
+    Scanner leer = new Scanner(System.in);
+    String cedula;
+    do{
+        System.out.println("Digite el número de cedula (#0###0###)");
+    cedula= leer.nextLine();
+    }while(cliente.validarCedula(cedula));
+    
+}
     //ESTE METODO SOLICITA LA FECHA EN EL FORMATO ESTABLECIDO
     public static void pedirFechaNac(Cliente cliente) {
         Scanner leer = new Scanner(System.in);
@@ -141,15 +153,11 @@ public class Banco {
     }
 
     //CON ESTE METODO AÑADIMOS UN NOMBRE
-    public static void pedirNombre(Cliente cliente) {
-        Scanner leer = new Scanner(System.in);
-        System.out.print("Digite su nombre: ");
-        String nombre = leer.next();
-        System.out.print("Digite su primer apellido: ");
-        String apellido1 = leer.next();
-        System.out.print("Digite su segundo apellido: ");
-        String apellido2 = leer.next();
-        String nombreCompleto = nombre + " " + apellido1 + " " + apellido2;
+    public static void rellenarNombre(Cliente cliente) {
+        Random r= new Random();
+        String[] Nombre = new String[]{"Hugo", "Martín", "Lucas", "Mateo", "Leo", "Daniel", "Alejandro", "Pablo", "Manuel", "Álvaro", "Adrián", "David", "Mario", "Enzo", "Diego", "Marcos", "Izan", "Javier", "Marco", "Álex", "Bruno", "Oliver", "Miguel", "Thiago", "Antonio"};
+        String[] Apellido = new String[]{"Rodríguez", "Vargas", "Jiménez", "Mora", "Rojas", "González", "Sánchez", "Hernández", "Ramírez", "Castro", "López", "Araya", "Solano", "Alvarado", "Chaves", "Pérez", "Morales", "Campos", "Quesada", "Gómez", "Arias", "Zúñiga", "Quiros", "Fernández", "Salazar"};
+        String nombreCompleto = r.nextInt(Nombre.length) + " " + r.nextInt(Apellido.length) + " " + r.nextInt(Apellido.length);
         cliente.setNombre(nombreCompleto);
     }
 
@@ -174,8 +182,8 @@ public class Banco {
         }
         cliente.setCorreo(correo);
     }
-    
-    public static void buscarCliente(){
+
+    public static void buscarCliente() {
 //        if (cedula == ) {
 //            System.out.println("La persona con cedula " + cedula + " si es un cliente);
 //        }else{
@@ -187,6 +195,7 @@ public class Banco {
     public static void error() {
         System.out.println("*****  ERROR  ******\nDato no valido\n********************");
     }
+
     /**
      * @param args the command line arguments
      */

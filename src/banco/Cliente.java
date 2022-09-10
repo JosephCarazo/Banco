@@ -48,6 +48,10 @@ public class Cliente {
         this.telefono = telefono;
     }
 
+    public void setCedula(int cedula) {
+        this.cedula = cedula;
+    }
+
     public String getCorreo() {
         return correo;
     }
@@ -57,7 +61,7 @@ public class Cliente {
     }
 
     public Cliente(int cedula, String nombre, String fechaNacimiento, String telefono, String correo) {
-        this.generarCedula();
+        this.cedula=cedula;
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
         this.telefono = telefono;
@@ -68,9 +72,22 @@ public class Cliente {
         this(000000000, "Usuario", null, null, null);
     }
 
-    public void generarCedula() {
-        int numeros = (int) (Math.random() * 10000000 + 99999999);
-        this.cedula = numeros;
+    public boolean  validarCedula(String cedula) {
+        boolean validacion=false;
+        if (cedula.length()==11){
+        try{
+        int digitos= Integer.parseInt(cedula);
+        validacion=true;
+        this.setCedula(digitos);
+        }catch(NumberFormatException nfe){
+            System.out.println("Solo digitos, No olvidar poner los ceros");
+            validacion=false;
+        }
+        }else {
+            System.out.println("Recuerde su cedula tiene una cantidad de 11 digitos");
+            validacion=false;
+        }
+        return validacion;
     }
 
     public void obtenerEdad() {
