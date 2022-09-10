@@ -91,8 +91,7 @@ public class Banco {
     public static void nuevoCliente() {
         Cliente cl = new Cliente();
         System.out.println("Por favor, digite los siguientes datos");
-        pedirCedula(c1);
-        rellenarNombre(cl);
+        pedirCedula(cl);
         pedirFechaNac(cl);
         pedirNumero(cl);
         pedirCorreo(cl);
@@ -108,7 +107,7 @@ public static void pedirCedula(Cliente cliente){
         System.out.println("Digite el número de cedula (#0###0###)");
     cedula= leer.nextLine();
     }while(cliente.validarCedula(cedula));
-    
+ rellenarNombre(cliente);
 }
     //ESTE METODO SOLICITA LA FECHA EN EL FORMATO ESTABLECIDO
     public static void pedirFechaNac(Cliente cliente) {
@@ -183,14 +182,22 @@ public static void pedirCedula(Cliente cliente){
         cliente.setCorreo(correo);
     }
 
-    public static void buscarCliente() {
-//        if (cedula == ) {
-//            System.out.println("La persona con cedula " + cedula + " si es un cliente);
-//        }else{
-//            System.out.println("La persona con cedula " + cedula + " no es un cliente.");
-//        }
+    public static boolean buscarCliente() {
+boolean encontrado=false;
+        Scanner leer = new Scanner(System.in);
+       int cedula=leer.nextInt();
+       Cliente busqueda= new Cliente(cedula);
+for (int x = 0; x < cliente.size(); x++) {
+  Cliente p = cliente.get(x);
+  String ced1= String.valueOf(p.getCedula());
+  if (ced1.equals(busqueda.getCedula())) {
+      encontrado = true;
+      System.out.println("Posicion de la lista "+ x);
+      break; // Terminar ciclo
+  } 
     }
-
+return encontrado;
+    }
     //ESTE METODO MUESTRA UN MENSAJE DE ERROR
     public static void error() {
         System.out.println("*****  ERROR  ******\nDato no valido\n********************");

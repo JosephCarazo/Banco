@@ -72,6 +72,11 @@ public class Cliente {
         this(000000000, "Usuario", null, null, null);
     }
 
+    public Cliente(int cedula) {
+        this.cedula = cedula;
+    }
+    
+
     public boolean  validarCedula(String cedula) {
         boolean validacion=false;
         if (cedula.length()==11){
@@ -79,7 +84,7 @@ public class Cliente {
         int digitos= Integer.parseInt(cedula);
         validacion=true;
         this.setCedula(digitos);
-        }catch(NumberFormatException nfe){
+        }catch(NumberFormatException nfe){//EN CASO DE QUE HAYAN PUESTO LETRAS EN LA CEDULA
             System.out.println("Solo digitos, No olvidar poner los ceros");
             validacion=false;
         }
