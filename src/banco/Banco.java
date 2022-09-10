@@ -27,8 +27,7 @@ public class Banco {
             case 1:
                 menuClientes();
             case 2:
-                crearCuenta();
-                menuPrincipal();
+                menuCuentas();
             case 3:
                 menuTranferencias();
                 menuPrincipal();
@@ -69,10 +68,31 @@ public class Banco {
             //TRANSFERENCIA
             case 4:
                 menuPrincipal();
+                
+        }
+    }
+    // Menu que nuestra las opciones de la cuenta
+    public static void menuCuentas() {
+        Scanner leer = new Scanner(System.in);
+        System.out.println("Digite una opcion\n1- Crear nueva cuenta\n2- Buscar cuenta\n3- Eliminar Cuenta\n4- Menu Principal" );
+        int op = leer.nextInt();
+        switch (op) {
+            case 1:
+                crearCuenta();
+                menuPrincipal();
+            case 2:
+                buscarCuenta();
+                menuPrincipal();
+            case 3: 
+                eliminarCuenta();
+                menuPrincipal();
+            case 4:
+                menuPrincipal();
+                
         }
     }
 
-    //metodo para crear cuenta
+    //Metodo para crear cuenta y agregar al arraylist
     public static void crearCuenta() {
         Scanner leer = new Scanner(System.in);
         Cuenta c = new Cuenta();
@@ -83,8 +103,51 @@ public class Banco {
         System.out.println("Ingrese el monto inicial de la cuenta");
         double saldo = leer.nextDouble();
         c.setSaldo(saldo);
+        cuentas.add(c);
+        System.out.println("**********Cuenta Creada***********");
         System.out.println("Numero Cuenta= " + c.getNumeroCuenta());
         System.out.println("Saldo Disponible= " + c.getSaldo());
+        System.out.println("");
+    }
+    // Metodo para buscar cuenta
+    public static void buscarCuenta() {
+        Scanner leer = new Scanner(System.in);
+        System.out.println("Digite el numero de cuenta que quiere buscar");
+       String cuenta=leer.next();
+       Cuenta busq= new Cuenta(cuenta);
+        for (int i = 0; i < cuentas.size(); i++) {
+            Cuenta b=cuentas.get(i);
+            String c=String.valueOf(b.getNumeroCuenta());
+            if (c.equals(busq.getNumeroCuenta())) {            
+                System.out.println("Cuenta encontrada: "+ c);
+                break; 
+            } else {
+                System.out.println("No se encontro la cuenta");
+               
+                break;
+            }
+        }
+
+    }
+    //Metodo para eliminar cuenta
+    public static void eliminarCuenta(){
+      Scanner leer = new Scanner(System.in);
+        System.out.println("Ingrese la cuenta que desea eliminar ");
+       String cuenta=leer.next();
+       Cuenta elim= new Cuenta(cuenta);
+        for (int i = 0; i < cuentas.size(); i++) {
+            Cuenta e = cuentas.get(i);
+            String c=String.valueOf(e.getNumeroCuenta());
+            if(c.equals(elim.getNumeroCuenta())){
+                cuentas.remove(e);
+                System.out.println("Cuenta eliminada: "+c);
+                break;
+            }else{
+                System.out.println("La cuenta no existe y no se puede eliminar");
+                break;
+            }
+        }
+        
     }
 
     //ESTE METODO AÑADE UN NUEVO CLIENTE

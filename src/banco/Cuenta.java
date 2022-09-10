@@ -16,6 +16,9 @@ public class Cuenta {
         this.numeroCuenta = numeroCuenta;
         this.saldo = saldo;
     }
+    public Cuenta(String numeroCuenta){
+        this.numeroCuenta=numeroCuenta;
+    }
 
     public Cuenta() {
     }
