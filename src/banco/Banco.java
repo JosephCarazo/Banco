@@ -49,8 +49,8 @@ public class Banco {
                 menuPrincipal();
             case 2:
                 System.out.println("Digite la cedula del cliente que desea buscar");
-                int cedula = leer.nextInt();
-                buscarCliente();
+                String cedula = leer.next();
+                buscarCliente(cedula);
                 menuPrincipal();
         }
     }
@@ -68,13 +68,14 @@ public class Banco {
             //TRANSFERENCIA
             case 4:
                 menuPrincipal();
-                
+
         }
     }
+
     // Menu que nuestra las opciones de la cuenta
     public static void menuCuentas() {
         Scanner leer = new Scanner(System.in);
-        System.out.println("Digite una opcion\n1- Crear nueva cuenta\n2- Buscar cuenta\n3- Eliminar Cuenta\n4- Menu Principal" );
+        System.out.println("Digite una opcion\n1- Crear nueva cuenta\n2- Buscar cuenta\n3- Eliminar Cuenta\n4- Menu Principal");
         int op = leer.nextInt();
         switch (op) {
             case 1:
@@ -83,12 +84,12 @@ public class Banco {
             case 2:
                 buscarCuenta();
                 menuPrincipal();
-            case 3: 
+            case 3:
                 eliminarCuenta();
                 menuPrincipal();
             case 4:
                 menuPrincipal();
-                
+
         }
     }
 
@@ -130,9 +131,10 @@ public class Banco {
         }
 
     }
+
     //Metodo para eliminar cuenta
-    public static void eliminarCuenta(){
-      Scanner leer = new Scanner(System.in);
+    public static void eliminarCuenta() {
+        Scanner leer = new Scanner(System.in);
         System.out.println("Ingrese la cuenta que desea eliminar ");
        String cuenta=leer.next();
        int pos=-1;
@@ -154,6 +156,7 @@ public class Banco {
         Cliente cl = new Cliente();
         System.out.println("Por favor, digite los siguientes datos");
         pedirCedula(cl);
+        rellenarNombre(cl);
         pedirFechaNac(cl);
         pedirNumero(cl);
         pedirCorreo(cl);
@@ -161,16 +164,18 @@ public class Banco {
         System.out.println("**********************\nSus datos:\nCedula: " + cl.getCedula() + "\nNombre: " + cl.getNombre()
                 + "\nFecha de nacimiento: " + cl.getFechaNacimiento() + "\nTelefono: " + cl.getTelefono() + "\nCorreo: " + cl.getCorreo() + "\n**********************");
     }
-    
-public static void pedirCedula(Cliente cliente){
-    Scanner leer = new Scanner(System.in);
-    String cedula;
-    do{
-        System.out.println("Digite el número de cedula (#0###0###)");
-    cedula= leer.nextLine();
-    }while(cliente.validarCedula(cedula));
- rellenarNombre(cliente);
-}
+
+    public static void pedirCedula(Cliente cliente) {
+        Scanner leer = new Scanner(System.in);
+        String cedula;
+        do {
+            System.out.println("Digite el número de cedula (#0###0###)");
+            cedula = leer.nextLine();
+            System.out.println(cedula.length());
+        } while (!cliente.validarCedula(cedula));
+
+    }
+
     //ESTE METODO SOLICITA LA FECHA EN EL FORMATO ESTABLECIDO
     public static void pedirFechaNac(Cliente cliente) {
         Scanner leer = new Scanner(System.in);
@@ -215,10 +220,10 @@ public static void pedirCedula(Cliente cliente){
 
     //CON ESTE METODO AÑADIMOS UN NOMBRE
     public static void rellenarNombre(Cliente cliente) {
-        Random r= new Random();
+        Random r = new Random();
         String[] Nombre = new String[]{"Hugo", "Martín", "Lucas", "Mateo", "Leo", "Daniel", "Alejandro", "Pablo", "Manuel", "Álvaro", "Adrián", "David", "Mario", "Enzo", "Diego", "Marcos", "Izan", "Javier", "Marco", "Álex", "Bruno", "Oliver", "Miguel", "Thiago", "Antonio"};
         String[] Apellido = new String[]{"Rodríguez", "Vargas", "Jiménez", "Mora", "Rojas", "González", "Sánchez", "Hernández", "Ramírez", "Castro", "López", "Araya", "Solano", "Alvarado", "Chaves", "Pérez", "Morales", "Campos", "Quesada", "Gómez", "Arias", "Zúñiga", "Quiros", "Fernández", "Salazar"};
-        String nombreCompleto = r.nextInt(Nombre.length) + " " + r.nextInt(Apellido.length) + " " + r.nextInt(Apellido.length);
+        String nombreCompleto = Nombre[r.nextInt(Nombre.length)] + " " + Apellido[r.nextInt(Apellido.length)] + " " + Apellido[r.nextInt(Apellido.length)];
         cliente.setNombre(nombreCompleto);
     }
 
@@ -244,22 +249,18 @@ public static void pedirCedula(Cliente cliente){
         cliente.setCorreo(correo);
     }
 
-    public static boolean buscarCliente() {
-boolean encontrado=false;
-        Scanner leer = new Scanner(System.in);
-       int cedula=leer.nextInt();
-       Cliente busqueda= new Cliente(cedula);
-for (int x = 0; x < cliente.size(); x++) {
-  Cliente p = cliente.get(x);
-  String ced1= String.valueOf(p.getCedula());
-  if (ced1.equals(busqueda.getCedula())) {
-      encontrado = true;
-      System.out.println("Posicion de la lista "+ x);
-      break; // Terminar ciclo
-  } 
+    public static void buscarCliente(String cedula) {
+        for (Cliente clientes : cliente) {
+            if (clientes.getCedula().equals(cedula)) {
+                System.out.println("Este Cliente si existe: ");
+                System.out.println(clientes);
+            } else {
+                System.out.println("Este cliente no existe");
+            }
+        }
+
     }
-return encontrado;
-    }
+
     //ESTE METODO MUESTRA UN MENSAJE DE ERROR
     public static void error() {
         System.out.println("*****  ERROR  ******\nDato no valido\n********************");
