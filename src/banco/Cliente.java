@@ -14,13 +14,13 @@ import java.time.format.DateTimeFormatter;
  */
 public class Cliente {
 
-    private int cedula;
+    private String cedula;
     private String nombre;
     private String fechaNacimiento;
     private String telefono;
     private String correo;
 
-    public int getCedula() {
+    public String getCedula() {
         return cedula;
     }
 
@@ -37,7 +37,7 @@ public class Cliente {
     }
 
     public void setFechaNacimiento(String edad) {
-        this.fechaNacimiento = fechaNacimiento;
+        this.fechaNacimiento = edad;
     }
 
     public String getTelefono() {
@@ -48,7 +48,7 @@ public class Cliente {
         this.telefono = telefono;
     }
 
-    public void setCedula(int cedula) {
+    public void setCedula(String cedula) {
         this.cedula = cedula;
     }
 
@@ -60,7 +60,7 @@ public class Cliente {
         this.correo = correo;
     }
 
-    public Cliente(int cedula, String nombre, String fechaNacimiento, String telefono, String correo) {
+    public Cliente(String cedula, String nombre, String fechaNacimiento, String telefono, String correo) {
         this.cedula=cedula;
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
@@ -69,21 +69,20 @@ public class Cliente {
     }
 
     public Cliente() {
-        this(000000000, "Usuario", null, null, null);
+        this("000000000", "Usuario", null, null, null);
     }
 
-    public Cliente(int cedula) {
+    public Cliente(String cedula) {
         this.cedula = cedula;
     }
     
 
     public boolean  validarCedula(String cedula) {
         boolean validacion=false;
-        if (cedula.length()==11){
+        if (cedula.length()==9){
         try{
-        int digitos= Integer.parseInt(cedula);
         validacion=true;
-        this.setCedula(digitos);
+        this.setCedula(cedula);
         }catch(NumberFormatException nfe){//EN CASO DE QUE HAYAN PUESTO LETRAS EN LA CEDULA
             System.out.println("Solo digitos, No olvidar poner los ceros");
             validacion=false;
