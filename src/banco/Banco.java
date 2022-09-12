@@ -69,7 +69,7 @@ public class Banco {
         System.out.println("Ingrese el monto");
         double monto=leer.nextDouble();
 //        Deposito depo=new Deposito(c,1,monto);
-        double m=0;
+        double m=0;//almacena saldo
         switch (transaccion) {
             case 1:
                 int pos=-1;
