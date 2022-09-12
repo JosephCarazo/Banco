@@ -120,7 +120,7 @@ public class Banco {
                 Cuenta colones = new Cuenta();
                 Random rc = new Random();
                 dig16 = rc.nextLong(9000000000000000L) + 1000000000000000L;
-                String cColones = String.valueOf(dig16);
+                String cColones = String.valueOf("CR"+dig16);
                 colones.setNumeroCuenta(cColones);
                 System.out.println("Ingrese el monto inicial de la cuenta");
                 saldo = leer.nextDouble();
@@ -133,7 +133,7 @@ public class Banco {
                 Cuenta dolares = new Cuenta();
                 Random rd = new Random();
                 dig16 = rd.nextLong(9000000000000000L) + 1000000000000000L;
-                String nCuenta = String.valueOf(dig16);
+                String nCuenta = String.valueOf("CR"+dig16);
                 dolares.setNumeroCuenta(nCuenta);
                 System.out.println("Ingrese el monto inicial de la cuenta");
                 saldo = leer.nextDouble();
