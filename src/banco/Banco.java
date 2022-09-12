@@ -26,11 +26,13 @@ public class Banco {
         switch (opcion) {
             case 1:
                 menuClientes();
+//                menuPrincipal();
             case 2:
                 menuCuentas();
+//                menuPrincipal();
             case 3:
                 menuTranferencias();
-                menuPrincipal();
+//                menuPrincipal();
             case 4:
                 break;
             default:
@@ -62,13 +64,16 @@ public class Banco {
         switch (transaccion) {
             case 1:
             //DEPOSITO
+                
             case 2:
             //RETIRO
+              
             case 3:
             //TRANSFERENCIA
+                
             case 4:
                 menuPrincipal();
-
+     
         }
     }
 
@@ -81,14 +86,23 @@ public class Banco {
             case 1:
                 crearCuenta();
                 menuPrincipal();
+                break;
             case 2:
                 buscarCuenta();
                 menuPrincipal();
+                break;
             case 3:
                 eliminarCuenta();
                 menuPrincipal();
+                break;
             case 4:
                 menuPrincipal();
+                break;
+                        
+               default:
+                System.out.println("Digite una opcion correcta");
+                menuCuentas();
+                
 
         }
     }
@@ -96,19 +110,48 @@ public class Banco {
     //Metodo para crear cuenta y agregar al arraylist
     public static void crearCuenta() {
         Scanner leer = new Scanner(System.in);
-        Cuenta c = new Cuenta();
-        Random r = new Random();
-        long dig16 = r.nextLong(9000000000000000L) + 1000000000000000L;
-        String nCuenta = String.valueOf(dig16);
-        c.setNumeroCuenta(nCuenta);
-        System.out.println("Ingrese el monto inicial de la cuenta");
-        double saldo = leer.nextDouble();
-        c.setSaldo(saldo);
-        cuentas.add(c);
-        System.out.println("**********Cuenta Creada***********");
-        System.out.println("Numero Cuenta= " + c.getNumeroCuenta());
-        System.out.println("Saldo Disponible= " + c.getSaldo());
-        System.out.println("");
+        System.out.println("Digite una opcion\n1- Crear cuenta Colones\n2- Crear cuenta Dolares\n3- Salir" );
+        int op = leer.nextInt();
+        long dig16;//Se guarda el numero aleatorio para la cuenta
+        double saldo=0;
+        switch (op) {
+            case 1:
+               
+                Cuenta colones = new Cuenta();
+                Random rc = new Random();
+                dig16 = rc.nextLong(9000000000000000L) + 1000000000000000L;
+                String cColones = String.valueOf(dig16);
+                colones.setNumeroCuenta(cColones);
+                System.out.println("Ingrese el monto inicial de la cuenta");
+                saldo = leer.nextDouble();
+                colones.setSaldo(saldo);
+                cuentas.add(colones);
+                System.out.println("Numero Cuenta= " + colones.getNumeroCuenta());
+                System.out.println("Saldo Disponible= " + colones.getSaldo()+" Colones");
+                break;
+            case 2:
+                Cuenta dolares = new Cuenta();
+                Random rd = new Random();
+                dig16 = rd.nextLong(9000000000000000L) + 1000000000000000L;
+                String nCuenta = String.valueOf(dig16);
+                dolares.setNumeroCuenta(nCuenta);
+                System.out.println("Ingrese el monto inicial de la cuenta");
+                saldo = leer.nextDouble();
+                dolares.setSaldo(saldo);
+                cuentas.add(dolares);
+                System.out.println("**********Cuenta Creada***********");
+                System.out.println("Numero Cuenta= " + dolares.getNumeroCuenta());
+                System.out.println("Saldo Disponible= " + dolares.getSaldo()+" Dolares");
+                System.out.println("");
+                break;
+            case 3: 
+                menuPrincipal();
+                break;
+                default:
+                System.out.println("Digite una opcion correcta");
+                crearCuenta();
+     
+        }
         
     }
   
