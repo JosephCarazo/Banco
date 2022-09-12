@@ -61,8 +61,40 @@ public class Banco {
         Scanner leer = new Scanner(System.in);
         System.out.println("Digite que tipo de transaccion desea hacer\n1- Deposito\n2- Retiro\n3- Transferencia\n4- Salir");
         int transaccion = leer.nextInt();
+        
+        Cuenta c=new Cuenta();
+        
+        System.out.println("Ingrese la cuenta");
+        String cuenta=leer.next();
+        System.out.println("Ingrese el monto");
+        double monto=leer.nextDouble();
+//        Deposito depo=new Deposito(c,1,monto);
+        double m=0;
         switch (transaccion) {
             case 1:
+                int pos=-1;
+                for (int i = 0; i < cuentas.size(); i++) { 
+                    if (cuentas.get(i).getNumeroCuenta().equals(cuenta)) { 
+                        pos=i;
+                        m=cuentas.get(pos).getSaldo();// obtenemos saldo de la cuenta
+//                        depo.deposito(c, monto);
+                     
+//                        depo.setCuenta(c.getNumeroCuenta());
+//                        cuentas.set(pos, c);
+                      
+                        c.setSaldo(m+monto);
+                        c.setNumeroCuenta(cuenta);
+                        cuentas.set(pos, c);
+                        
+                    }
+                }
+                if(pos!=-1){
+                   System.out.println("============InfoCuenta==============");
+                   System.out.println(cuentas.get(pos));
+                   System.out.println("====================================");
+                }else{
+                    System.out.println("La cuenta digitada no existe en nuestra base de datos");
+                }
             //DEPOSITO
                 
             case 2:

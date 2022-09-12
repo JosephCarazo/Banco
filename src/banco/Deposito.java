@@ -14,7 +14,7 @@ public class Deposito extends Transaccion {
         super(c1,id, monto);
         deposito(c1,monto);
     }
-     private void deposito(Cuenta c1,double monto){
+     public void deposito(Cuenta c1,double monto){
      c1.setSaldo(c1.getSaldo()+monto);
      }
 }

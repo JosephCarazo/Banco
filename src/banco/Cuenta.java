@@ -46,7 +46,7 @@ public class Cuenta {
 
     @Override
     public String toString() {
-        return  "numeroCuenta=" + numeroCuenta + ", saldo=" + saldo + '}';
+        return  "\n"+'['+" Numero Cuenta= " + numeroCuenta + ']'+"\n"+  '['+ "Saldo Disponible= " + saldo + ']';
     }
    
   
