@@ -43,6 +43,11 @@ public class Cuenta {
             this.saldo = saldo;
         }
     }
+
+    @Override
+    public String toString() {
+        return  "numeroCuenta=" + numeroCuenta + ", saldo=" + saldo + '}';
+    }
    
   
 }

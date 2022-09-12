@@ -108,24 +108,25 @@ public class Banco {
         System.out.println("Numero Cuenta= " + c.getNumeroCuenta());
         System.out.println("Saldo Disponible= " + c.getSaldo());
         System.out.println("");
+        
     }
+  
     // Metodo para buscar cuenta
     public static void buscarCuenta() {
         Scanner leer = new Scanner(System.in);
         System.out.println("Digite el numero de cuenta que quiere buscar");
-       String cuenta=leer.next();
-       Cuenta busq= new Cuenta(cuenta);
-        for (int i = 0; i < cuentas.size(); i++) {
-            Cuenta b=cuentas.get(i);
-            String c=String.valueOf(b.getNumeroCuenta());
-            if (c.equals(busq.getNumeroCuenta())) {            
-                System.out.println("Cuenta encontrada: "+ c);
-                break; 
-            } else {
-                System.out.println("No se encontro la cuenta");
-               
-                break;
+        String cuenta=leer.next();
+       
+       int pos=-1;
+        for (int i = 0; i < cuentas.size(); i++) { 
+            if (cuentas.get(i).getNumeroCuenta().equals(cuenta)) {    
+                pos=i;                   
             }
+        }
+        if(pos!=-1){
+           System.out.println(cuentas.get(pos)+ " Posicion : "+pos+" --Cuenta encontrada: "); 
+        }else{
+            System.out.println("La cuenta digitada no existe en nuestra base de datos");
         }
 
     }
@@ -134,20 +135,18 @@ public class Banco {
       Scanner leer = new Scanner(System.in);
         System.out.println("Ingrese la cuenta que desea eliminar ");
        String cuenta=leer.next();
-       Cuenta elim= new Cuenta(cuenta);
+       int pos=-1;
         for (int i = 0; i < cuentas.size(); i++) {
-            Cuenta e = cuentas.get(i);
-            String c=String.valueOf(e.getNumeroCuenta());
-            if(c.equals(elim.getNumeroCuenta())){
-                cuentas.remove(e);
-                System.out.println("Cuenta eliminada: "+c);
-                break;
-            }else{
-                System.out.println("La cuenta no existe y no se puede eliminar");
-                break;
+            if(cuentas.get(i).getNumeroCuenta().equals(cuenta)){
+                pos=i;
+                cuentas.remove(pos);
             }
         }
-        
+        if(pos!=-1){
+           System.out.println("Cuenta Eliminada"); 
+        }else{
+            System.out.println("No se pudo eliminar por que no existe o ya se ha eliminado anteriormente");
+        }
     }
 
     //ESTE METODO AÑADE UN NUEVO CLIENTE
