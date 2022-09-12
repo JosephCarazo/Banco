@@ -183,14 +183,16 @@ public class Banco {
        int pos=-1;
         for (int i = 0; i < cuentas.size(); i++) {
             if(cuentas.get(i).getNumeroCuenta().equals(cuenta)){
-                pos=i;
-                cuentas.remove(pos);
+                if(cuentas.get(i).getSaldo()==0){// revisa si la cuenta solicitada esta en cero 
+                    pos=i;
+                   cuentas.remove(pos); 
+                }
             }
         }
         if(pos!=-1){
            System.out.println("Cuenta Eliminada"); 
         }else{
-            System.out.println("No se pudo eliminar por que no existe o ya se ha eliminado anteriormente");
+            System.out.println("La cuenta no se puede eliminar por que no esta en cero o no existe");
         }
     }
 
