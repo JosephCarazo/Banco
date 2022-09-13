@@ -11,8 +11,8 @@ package banco;
 public class CuentaDolares extends Cuenta {
     private static double tipoCambio;
 
-    public CuentaDolares(String numeroCuenta, double saldo) {
-        super(numeroCuenta, saldo);
+    public CuentaDolares(String dueño,String numeroCuenta, double saldo) {
+        super(dueño,numeroCuenta, saldo);
         tipoCambio=680;
     }
     

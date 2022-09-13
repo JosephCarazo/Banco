@@ -10,8 +10,8 @@ package banco;
  */
 public class CuentaColones extends Cuenta {
 
-    public CuentaColones(String numeroCuenta, double saldo) {
-        super(numeroCuenta, saldo);
+    public CuentaColones(String Dueño,String numeroCuenta, double saldo) {
+        super(Dueño,numeroCuenta, saldo);
         
     }
 
