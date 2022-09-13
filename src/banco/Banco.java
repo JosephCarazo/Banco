@@ -76,7 +76,9 @@ public class Banco {
                 nuevoCliente();
                 menuPrincipal();
             case 2:
-                buscarCliente(); //QUE PASO ACA??
+                System.out.println("Ingrese la cedula a buscar: ");
+                String cd = leer.next();
+                buscarCliente(cd); //QUE PASO ACA??
                 menuPrincipal();
             case 3:
                 obtenerEdad();
@@ -102,8 +104,10 @@ public class Banco {
         switch (transaccion) {
             case 1:
                 deposito(cuenta, monto, c, m);
+                menuPrincipal();
             case 2:
                 retiro(cuenta, c, monto, m);
+                menuPrincipal();
             case 3:
             //TRANSFERENCIA
 
@@ -334,6 +338,8 @@ public class Banco {
             }
         }
         if (pos != -1) {
+            System.out.println("\n==========Retiro exitoso===========");
+            System.out.println("\nMonto Depositado: "+monto);
             System.out.println("\n============Informacion de Cuenta==============");
             System.out.println(cuentas.get(pos));
             System.out.println("====================================");
@@ -401,6 +407,8 @@ public class Banco {
             }
         }
         if (pos != -1) {
+            System.out.println("\n==========Retiro exitoso===========");
+            System.out.println("\nMonto retirado: "+monto);
             System.out.println("\n============Informacion de Cuenta==============");
             System.out.println(cuentas.get(pos));
             System.out.println("====================================");
