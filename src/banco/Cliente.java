@@ -4,6 +4,7 @@
  */
 package banco;
 
+import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -61,7 +62,7 @@ public class Cliente {
     }
 
     public Cliente(String cedula, String nombre, String fechaNacimiento, String telefono, String correo) {
-        this.cedula=cedula;
+        this.cedula = cedula;
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
         this.telefono = telefono;
@@ -75,38 +76,27 @@ public class Cliente {
     public Cliente(String cedula) {
         this.cedula = cedula;
     }
-    
 
-    public boolean  validarCedula(String cedula) {
-        boolean validacion=false;
-        if (cedula.length()==9){
-        try{
-        validacion=true;
-        this.setCedula(cedula);
-        }catch(NumberFormatException nfe){//EN CASO DE QUE HAYAN PUESTO LETRAS EN LA CEDULA
-            System.out.println("Solo digitos, No olvidar poner los ceros");
-            validacion=false;
-        }
-        }else {
+    public boolean validarCedula(String cedula) {
+        boolean validacion = false;
+        if (cedula.length() == 9) {
+            try {
+                validacion = true;
+                this.setCedula(cedula);
+            } catch (NumberFormatException nfe) {//EN CASO DE QUE HAYAN PUESTO LETRAS EN LA CEDULA
+                System.out.println("Solo digitos. No olvidar poner los ceros");
+                validacion = false;
+            }
+        } else {
             System.out.println("Recuerde su cedula tiene una cantidad de 11 digitos");
-            validacion=false;
+            validacion = false;
         }
         return validacion;
     }
 
-    public void obtenerEdad() {
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate fechaNac = LocalDate.parse(fechaNacimiento, formato);
-        LocalDate ahora = LocalDate.now();
-
-        Period periodo = Period.between(fechaNac, ahora);
-        System.out.printf("%s anios", periodo.getYears()); System.out.println("");
-    }
-
-    
     @Override
     public String toString() {
-        return "Cliente" + "\nCedula: " + cedula + "\nNombre: " + nombre + "\nEdad: " + fechaNacimiento + "\nTelefono: " + telefono + "\nCorreo: " + correo;
+        return "Cliente" + "\nCedula: " + cedula + "\nNombre: " + nombre + "\nFechaNacimiento: " + fechaNacimiento + "\nTelefono: " + telefono + "\nCorreo: " + correo;
     }
 
 }

@@ -4,6 +4,9 @@
  */
 package banco;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -14,8 +17,8 @@ import java.util.Scanner;
  */
 public class Banco {
 
-    private static ArrayList<Cuenta> cuentas = new ArrayList<>();
     private static ArrayList<Cliente> cliente = new ArrayList<>();
+    protected static ArrayList<Cuenta> cuentas = new ArrayList<>();
 
     public static void menuPrincipal() {
         Scanner leer = new Scanner(System.in);
@@ -41,34 +44,58 @@ public class Banco {
         }
     }
 
+    public static void obtenerEdad() {
+        Scanner leer = new Scanner(System.in);
+        System.out.println("Digite la cedula del cliente al que desea conocer su edad");
+        String cedula = leer.next();
+
+        int pos = -1;
+        for (int i = 0; i < cliente.size(); i++) {
+            if (cliente.get(i).getCedula().equals(cedula)) {
+                pos = i;
+                DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate fechaNac = LocalDate.parse(cliente.get(i).getFechaNacimiento(), formato);
+                LocalDate ahora = LocalDate.now();
+                Period periodo = Period.between(fechaNac, ahora);
+                System.out.printf("%s anios", periodo.getYears());
+                System.out.println("");
+            }
+        }
+        if (pos == -1) {
+            System.out.println("El cliente con la cedula " + cedula + " no existe");
+        }
+        
+    }
+
     public static void menuClientes() {
         Scanner leer = new Scanner(System.in);
-        System.out.println("Digite una opcion\n1- Crear nuevo cliente\n2- Buscar cliente");
+        System.out.println("Digite una opcion\n1- Crear nuevo cliente\n2- Buscar cliente\n3- Saber edad de cliente");
         int op = leer.nextInt();
         switch (op) {
             case 1:
                 nuevoCliente();
                 menuPrincipal();
             case 2:
-                System.out.println("Digite la cedula del cliente que desea buscar");
-                String cedula = leer.next();
-                buscarCliente(cedula);
+                buscarCliente();
+                menuPrincipal();
+            case 3:
+                obtenerEdad();
                 menuPrincipal();
         }
     }
 
     public static void menuTranferencias() {
         Scanner leer = new Scanner(System.in);
-        System.out.println("Digite que tipo de transaccion desea hacer\n1- Deposito\n2- Retiro\n3- Transferencia\n4- Salir");
+        System.out.println("\nDigite que tipo de transaccion desea hacer\n1- Deposito\n2- Retiro\n3- Transferencia\n4- Salir");
         int transaccion = leer.nextInt();
         if (transaccion == 4) {
             menuPrincipal();
         }
         Cuenta c = new Cuenta();
 
-        System.out.println("Ingrese la cuenta");
+        System.out.println("\nIngrese la cuenta");
         String cuenta = leer.next();
-        System.out.println("Ingrese el monto");
+        System.out.println("\nIngrese el monto");
         double monto = leer.nextDouble();
 //        Deposito depo=new Deposito(c,1,monto);
         double m = 0;//almacena saldo
@@ -86,7 +113,7 @@ public class Banco {
     // Menu que nuestra las opciones de la cuenta
     public static void menuCuentas() {
         Scanner leer = new Scanner(System.in);
-        System.out.println("Digite una opcion\n1- Crear nueva cuenta\n2- Buscar cuenta\n3- Eliminar Cuenta\n4- Menu Principal");
+        System.out.println("\nDigite una opcion\n1- Crear nueva cuenta\n2- Buscar cuenta\n3- Eliminar Cuenta\n4- Menu Principal");
         int op = leer.nextInt();
         switch (op) {
             case 1 -> {
@@ -115,7 +142,7 @@ public class Banco {
     //Metodo para crear cuenta y agregar al arraylist
     public static void crearCuenta() {
         Scanner leer = new Scanner(System.in);
-        System.out.println("Digite una opcion\n1- Crear cuenta Colones\n2- Crear cuenta Dolares\n3- Salir");
+        System.out.println("\nDigite una opcion\n1- Crear cuenta Colones\n2- Crear cuenta Dolares\n3- Salir");
         int op = leer.nextInt();
         long dig16 = 0;//Se guarda el numero aleatorio para la cuenta
         double saldo = 0;
@@ -140,7 +167,7 @@ public class Banco {
     // Metodo para buscar cuenta
     public static void buscarCuenta() {
         Scanner leer = new Scanner(System.in);
-        System.out.println("Digite el numero de cuenta que quiere buscar");
+        System.out.println("\nDigite el numero de cuenta que quiere buscar");
         String cuenta = leer.next();
 
         int pos = -1;
@@ -150,9 +177,9 @@ public class Banco {
             }
         }
         if (pos != -1) {
-            System.out.println(cuentas.get(pos) + " Posicion : " + pos + " --Cuenta encontrada: ");
+            System.out.println("\n*** CUENTA ENCONTRADA ***" + cuentas.get(pos) + "\nPosicion : " + pos + "\n************************\n");
         } else {
-            System.out.println("La cuenta digitada no existe en nuestra base de datos");
+            System.out.println("\nLa cuenta digitada no existe en la base de datos\n\n");
         }
 
     }
@@ -160,7 +187,7 @@ public class Banco {
     //Metodo para eliminar cuenta
     public static void eliminarCuenta() {
         Scanner leer = new Scanner(System.in);
-        System.out.println("Ingrese la cuenta que desea eliminar ");
+        System.out.println("\nIngrese la cuenta que desea eliminar ");
         String cuenta = leer.next();
         int pos = -1;
         for (int i = 0; i < cuentas.size(); i++) {
@@ -172,23 +199,23 @@ public class Banco {
             }
         }
         if (pos != -1) {
-            System.out.println("Cuenta Eliminada");
+            System.out.println("\n** CUENTA ELIMINADA ** \n");
         } else {
-            System.out.println("La cuenta no se puede eliminar porque no esta en cero o no existe");
+            System.out.println("\nLa cuenta no se puede eliminar porque no esta en cero o no existe\n");
         }
     }
 
     //ESTE METODO AÑADE UN NUEVO CLIENTE
     public static void nuevoCliente() {
         Cliente cl = new Cliente();
-        System.out.println("Por favor, digite los siguientes datos");
+        System.out.println("\nPor favor, digite los siguientes datos");
         pedirCedula(cl);
         rellenarNombre(cl);
         pedirFechaNac(cl);
         pedirNumero(cl);
         pedirCorreo(cl);
         cliente.add(cl);
-        System.out.println("**********************\nSus datos:\nCedula: " + cl.getCedula() + "\nNombre: " + cl.getNombre()
+        System.out.println("\n**********************\nSus datos:\nCedula: " + cl.getCedula() + "\nNombre: " + cl.getNombre()
                 + "\nFecha de nacimiento: " + cl.getFechaNacimiento() + "\nTelefono: " + cl.getTelefono() + "\nCorreo: " + cl.getCorreo() + "\n**********************");
     }
 
@@ -196,9 +223,8 @@ public class Banco {
         Scanner leer = new Scanner(System.in);
         String cedula;
         do {
-            System.out.println("Digite el numero de cedula (#0###0###)");
+            System.out.println("\nDigite el numero de cedula (#0###0###)");
             cedula = leer.nextLine();
-            System.out.println(cedula.length());
         } while (!cliente.validarCedula(cedula));
 
     }
@@ -248,8 +274,8 @@ public class Banco {
     //CON ESTE METODO AÑADIMOS UN NOMBRE
     public static void rellenarNombre(Cliente cliente) {
         Random r = new Random();
-        String[] Nombre = new String[]{"Hugo", "Martín", "Lucas", "Mateo", "Leo", "Daniel", "Alejandro", "Pablo", "Manuel", "Álvaro", "Adrián", "David", "Mario", "Enzo", "Diego", "Marcos", "Izan", "Javier", "Marco", "Álex", "Bruno", "Oliver", "Miguel", "Thiago", "Antonio"};
-        String[] Apellido = new String[]{"Rodríguez", "Vargas", "Jiménez", "Mora", "Rojas", "González", "Sánchez", "Hernández", "Ramírez", "Castro", "López", "Araya", "Solano", "Alvarado", "Chaves", "Pérez", "Morales", "Campos", "Quesada", "Gómez", "Arias", "Zúñiga", "Quiros", "Fernández", "Salazar"};
+        String[] Nombre = new String[]{"Hugo", "Martin", "Lucas", "Mateo", "Leo", "Daniel", "Alejandro", "Pablo", "Manuel", "Alvaro", "Adrian", "David", "Mario", "Enzo", "Diego", "Marcos", "Izan", "Javier", "Marco", "Alex", "Bruno", "Oliver", "Miguel", "Thiago", "Antonio"};
+        String[] Apellido = new String[]{"Rodriguez", "Vargas", "Jimenez", "Mora", "Rojas", "Gonzalez", "Sanchez", "Hernandez", "Ramirez", "Castro", "Lopez", "Araya", "Solano", "Alvarado", "Chaves", "Perez", "Morales", "Campos", "Quesada", "Gomez", "Arias", "Watson", "Quiros", "Fernandez", "Salazar"};
         String nombreCompleto = Nombre[r.nextInt(Nombre.length)] + " " + Apellido[r.nextInt(Apellido.length)] + " " + Apellido[r.nextInt(Apellido.length)];
         cliente.setNombre(nombreCompleto);
     }
@@ -276,14 +302,20 @@ public class Banco {
         cliente.setCorreo(correo);
     }
 
-    public static void buscarCliente(String cedula) {
-        for (Cliente clientes : cliente) {
-            if (clientes.getCedula().equals(cedula)) {
-                System.out.println("Este cliente si existe: ");
-                System.out.println(clientes);
-            } else {
-                System.out.println("Este cliente no existe");
+    public static void buscarCliente() {
+        Scanner leer = new Scanner(System.in);
+        System.out.println("\nDigite el numero de cedula del cliente que desea buscar");
+        String cedula = leer.next();
+        int pos = -1;
+        for (int i = 0; i < cliente.size(); i++) {
+            if (cliente.get(i).getCedula().equals(cedula)) {
+                pos = i;
             }
+        }
+        if (pos != -1) {
+            System.out.println("\n*** CLIENTE ENCONTRADO ***" + cliente.get(pos) + "\n************************\n");
+        } else {
+            System.out.println("\nEl cliente con cedula " + cedula + " no existe en la base de datos\n\n");
         }
 
     }
@@ -304,11 +336,11 @@ public class Banco {
             }
         }
         if (pos != -1) {
-            System.out.println("============InfoCuenta==============");
+            System.out.println("\n============Informacion de Cuenta==============");
             System.out.println(cuentas.get(pos));
             System.out.println("====================================");
         } else {
-            System.out.println("La cuenta digitada no existe en nuestra base de datos");
+            System.out.println("La cuenta digitada no existe en la base de datos");
         }
     }
 
@@ -319,13 +351,13 @@ public class Banco {
         dig16 = rd.nextLong(9000000000000000L) + 1000000000000000L;
         String nCuenta = String.valueOf("CR" + dig16);
         dolares.setNumeroCuenta(nCuenta);
-        System.out.println("Ingrese el monto inicial de la cuenta");
+        System.out.println("\nIngrese el monto inicial de la cuenta");
         saldo = leer.nextDouble();
         dolares.setSaldo(saldo);
         cuentas.add(dolares);
-        System.out.println("**********Cuenta Creada***********");
-        System.out.println("Numero Cuenta = " + dolares.getNumeroCuenta());
-        System.out.println("Saldo Disponible = " + dolares.getSaldo() + " dolares\n");
+        System.out.println("\n********** CUENTA CREADA ***********");
+        System.out.println("Numero Cuenta: " + dolares.getNumeroCuenta());
+        System.out.println("Saldo Disponible: " + dolares.getSaldo() + " dolares\n");
     }
 
     public static void cuentaColones(long dig16, double saldo) {
@@ -335,13 +367,13 @@ public class Banco {
         dig16 = rc.nextLong(9000000000000000L) + 1000000000000000L;
         String cColones = String.valueOf("CR" + dig16);
         colones.setNumeroCuenta(cColones);
-        System.out.println("Ingrese el monto inicial de la cuenta");
+        System.out.println("\nIngrese el monto inicial de la cuenta");
         saldo = leer.nextDouble();
         colones.setSaldo(saldo);
         cuentas.add(colones);
-        System.out.println("**********Cuenta Creada***********");
-        System.out.println("Numero Cuenta = " + colones.getNumeroCuenta());
-        System.out.println("Saldo Disponible = " + colones.getSaldo() + " colones\n");
+        System.out.println("\n********** CUENTA CREADA ***********");
+        System.out.println("Numero Cuenta: " + colones.getNumeroCuenta());
+        System.out.println("Saldo Disponible: " + colones.getSaldo() + " colones\n");
     }
 
     public static void retiro(String cuenta, Cuenta c, double monto, double m) {
@@ -356,20 +388,37 @@ public class Banco {
             }
         }
         if (pos != -1) {
-            System.out.println("============InfoCuenta==============");
+            System.out.println("\n============Informacion de Cuenta==============");
             System.out.println(cuentas.get(pos));
             System.out.println("====================================");
         } else {
-            System.out.println("La cuenta digitada no existe en nuestra base de datos");
+            System.out.println("\nLa cuenta digitada no existe en nuestra base de datos");
         }
     }
 
-    public void transferencia(){
-        
+    public void retiro(double m, Cuenta c, double monto, String cuenta) {
+        int pos = -1;
+        for (int i = 0; i < cuentas.size(); i++) {
+            pos = i;
+            if (cuentas.get(i).getNumeroCuenta().equals(cuenta)) {
+                m = cuentas.get(pos).getSaldo();
+                c.setSaldo(m - monto);
+                c.setNumeroCuenta(cuenta);
+                cuentas.set(pos, c);
+            }
+        }
+        if (pos != -1) {
+            System.out.println("\n============Informacion de Cuenta==============");
+            System.out.println(cuentas.get(pos));
+            System.out.println("====================================");
+        } else {
+            System.out.println("\nLa cuenta digitada no existe en nuestra base de datos");
+        }
     }
+
     //ESTE METODO MUESTRA UN MENSAJE DE ERROR
     public static void error() {
-        System.out.println("*****  ERROR  ******\nDato no valido\n********************");
+        System.out.println("\n*****  ERROR  ******\nDato no valido\n********************");
     }
 
     /**

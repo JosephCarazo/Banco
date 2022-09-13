@@ -67,24 +67,21 @@ public abstract class Transaccion {
         this.fechaHora = fechaHora;
     }
 
-    //ESTE CONSTRUCTOR SE UTILIZA PARA TRANSFERENCIA ENTRE CUENTAS(POR ELLOS DOS CUENTAS)
-    public Transaccion(Cuenta c1, Cuenta c2, int id, String cuenta, double monto, double saldoAnterior) {
-        this.id = id;
-        this.cuenta = cuenta;
-        this.monto = monto;
-        this.saldoAnterior = saldoAnterior;
+    private void generarId() {
+        this.id = (int) (Math.random() * 1000000);
+    }
+    
+    public void fechaHora(){
         this.fechaHora = String.valueOf(LocalDateTime.now());
-
     }
 
-    //ESTE CONSTRUCTOR ES PARA RETIROS Y DEPOSITO
-    public Transaccion(Cuenta c1, int id, double monto) {
-        this.id = id;
-        this.cuenta=c1.getNumeroCuenta();
+    public Transaccion(String cuenta, double monto) {
+        generarId();
+        fechaHora();
+        this.cuenta = cuenta;
         this.monto = monto;
-        this.saldoAnterior =c1.getSaldo();
-        this.fechaHora = String.valueOf(LocalDateTime.now());
-
+        this.saldoAnterior = saldoFinal + monto;
+        this.saldoFinal = saldoFinal - monto;
     }
 
     @Override
