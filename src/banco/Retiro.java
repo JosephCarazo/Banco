@@ -10,20 +10,8 @@ package banco;
  */
 public class Retiro extends Transaccion {
 
-    public Retiro(Cuenta c1,int id, double monto) {
-        super(c1,id, monto);
-        this.saldoFinal=c1.getSaldo()-monto;
-        Retiro(c1,monto);
+    public Retiro(String cuenta, double monto) {
+        super(cuenta, monto);
     }
-    private void Retiro(Cuenta c1 ,double monto){
-        if(monto>c1.getSaldo()){
-            System.out.println("Saldo insuficiente");
-        }else{
-            c1.setSaldo(c1.getSaldo()-monto);
-        }
-            
-    }
-    
-   
-    
+
 }
