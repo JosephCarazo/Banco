@@ -19,6 +19,7 @@ public class Banco {
 
     private static ArrayList<Cliente> cliente = new ArrayList<>();
     protected static ArrayList<Cuenta> cuentas = new ArrayList<>();
+    protected static ArrayList<Transferencia> transferencia = new ArrayList<>();
 
     public static void menuPrincipal() {
         Scanner leer = new Scanner(System.in);
@@ -64,7 +65,7 @@ public class Banco {
         if (pos == -1) {
             System.out.println("El cliente con la cedula " + cedula + " no existe");
         }
-        
+
     }
 
     public static void menuClientes() {
@@ -76,9 +77,9 @@ public class Banco {
                 nuevoCliente();
                 menuPrincipal();
             case 2:
-                System.out.println("Ingrese la cedula a buscar: ");
-                String cd = leer.next();
-                buscarCliente(cd); //QUE PASO ACA??
+                System.out.println("Escriba el numero de cedula del Cliente a buscar");
+                String Ccliente= leer.nextLine();
+                buscarCliente(Ccliente); //QUE PASO ACA??
                 menuPrincipal();
             case 3:
                 obtenerEdad();
@@ -95,22 +96,41 @@ public class Banco {
         }
         Cuenta c = new Cuenta();
 
-        System.out.println("\nIngrese la cuenta");
-        String cuenta = leer.next();
-        System.out.println("\nIngrese el monto");
-        double monto = leer.nextDouble();
 //        Deposito depo=new Deposito(c,1,monto);
-        double m = 0;//almacena saldo
+        double m = 0, monto;//almacena saldo
+        String cuenta;
         switch (transaccion) {
             case 1:
+                System.out.println("\nIngrese la cuenta");
+                cuenta = leer.next();
+                System.out.println("\nIngrese el monto");
+                monto = leer.nextDouble();
                 deposito(cuenta, monto, c, m);
                 menuPrincipal();
             case 2:
+                System.out.println("\nIngrese la cuenta");
+                cuenta = leer.next();
+                System.out.println("\nIngrese el monto");
+                monto = leer.nextDouble();
                 retiro(cuenta, c, monto, m);
                 menuPrincipal();
             case 3:
-            //TRANSFERENCIA
+                submenuTrasferencia();
+                menuPrincipal();
+        }
+    }
 
+    private static void submenuTrasferencia() {
+        String Cuenta1, Cuenta2;
+        Scanner leer = new Scanner(System.in);
+        System.out.println("Cuenta 1");
+        Cuenta1 = leer.nextLine();
+        System.out.println("Cuenta 2");
+        Cuenta2 = leer.nextLine();
+        if (buscarCuentaPos(Cuenta1) == null || buscarCuentaPos(Cuenta2) == null) {
+            System.out.println("Cuentas no encontrada");
+        } else {
+            transferencia(buscarCuentaPos(Cuenta1), buscarCuentaPos(Cuenta2));
         }
     }
 
@@ -182,9 +202,27 @@ public class Banco {
         }
         if (pos != -1) {
             System.out.println("\n*** CUENTA ENCONTRADA ***" + cuentas.get(pos) + "\nPosicion : " + pos + "\n************************\n");
+
         } else {
             System.out.println("\nLa cuenta digitada no existe en la base de datos\n\n");
         }
+
+    }
+
+    public static Cuenta buscarCuentaPos(String numdeCuenta) {
+        for (Cuenta cuent : cuentas) {
+            if (cuent.getNumeroCuenta().equals(numdeCuenta)) {
+                System.out.println("Esta cuenta si existe: ");
+                System.out.println(cuent);
+                return cuent;
+
+            } else {
+                System.out.println("Esa cuenta no existe "+numdeCuenta);
+
+            }
+
+        }
+        return null;
 
     }
 
@@ -307,24 +345,25 @@ public class Banco {
     }
 
     public static boolean buscarCliente(String cedula) {
-        boolean validacion=false;
+        boolean validacion = false;
         for (Cliente clientes : cliente) {
             if (clientes.getCedula().equals(cedula)) {
                 System.out.println("Este cliente si existe: ");
                 System.out.println(clientes);
-                validacion=true;
+                validacion = true;
             } else {
                 System.out.println("Este cliente no existe");
-                validacion=false;
+                validacion = false;
             }
-           
+
         }
- return validacion;
+        return validacion;
     }
 
     public static void deposito(String cuenta, double monto, Cuenta c, double m) {
         int pos = -1;
         for (int i = 0; i < cuentas.size(); i++) {
+
             if (cuentas.get(i).getNumeroCuenta().equals(cuenta)) {
                 pos = i;
                 m = cuentas.get(pos).getSaldo();// obtenemos saldo de la cuenta
@@ -339,7 +378,7 @@ public class Banco {
         }
         if (pos != -1) {
             System.out.println("\n==========Retiro exitoso===========");
-            System.out.println("\nMonto Depositado: "+monto);
+            System.out.println("\nMonto Depositado: " + monto);
             System.out.println("\n============Informacion de Cuenta==============");
             System.out.println(cuentas.get(pos));
             System.out.println("====================================");
@@ -351,48 +390,49 @@ public class Banco {
     public static void cuentaDolares(long dig16, double saldo) {
         Scanner leer = new Scanner(System.in);
         System.out.println("Escriba la cedula del cliente");
-        String cliente=leer.nextLine();
-        if (buscarCliente(cliente)){
-        Cuenta dolares = new Cuenta();
-        Random rd = new Random();
-        dig16 = rd.nextLong(9000000000000000L) + 1000000000000000L;
-        String nCuenta = String.valueOf("CR" + dig16);
-        dolares.setNumeroCuenta(nCuenta);
-        System.out.println("\nIngrese el monto inicial de la cuenta");
-        saldo = leer.nextDouble();
-        dolares.setSaldo(saldo);
-        dolares.setCedulaDueño(cliente);
-        cuentas.add(dolares);
-        System.out.println("**********Cuenta Creada***********");
-        System.out.println("Numero Cuenta = " + dolares.getNumeroCuenta());
-        System.out.println("Saldo Disponible = " + dolares.getSaldo() + " dolares\n");
-    }else{
-            System.out.println("No existe el cliente");
+        String cliente = leer.nextLine();
+        if (buscarCliente(cliente)) {
+
+            Cuenta dolares = new Cuenta();
+            Random rd = new Random();
+            dig16 = rd.nextLong(9000000000000000L) + 1000000000000000L;
+            String nCuenta = String.valueOf("CR" + dig16);
+            dolares.setNumeroCuenta(nCuenta);
+            System.out.println("\nIngrese el monto inicial de la cuenta");
+            saldo = leer.nextDouble();
+            dolares.setSaldo(saldo);
+            dolares.setCedulaDueño(cliente);
+            cuentas.add(dolares);
+            System.out.println("**********Cuenta Creada***********");
+            System.out.println("Numero Cuenta = " + dolares.getNumeroCuenta());
+            System.out.println("Saldo Disponible = " + dolares.getSaldo() + " dolares\n");
+        } else {
+            System.out.println("ERROR");
         }
     }
 
     public static void cuentaColones(long dig16, double saldo) {
         Scanner leer = new Scanner(System.in);
         System.out.println("Escriba el numero de cédula cliente");
-        String cliente=leer.nextLine();
-        if (buscarCliente(cliente)){
-        Cuenta colones = new Cuenta();
-        Random rc = new Random();
-        dig16 = rc.nextLong(9000000000000000L) + 1000000000000000L;
-        String cColones = String.valueOf("CR" + dig16);
-        colones.setNumeroCuenta(cColones);
-        System.out.println("\nIngrese el monto inicial de la cuenta");
-        saldo = leer.nextDouble();
-        colones.setCedulaDueño(cliente);
-        colones.setSaldo(saldo);
-        cuentas.add(colones);
-        System.out.println("**********Cuenta Creada***********");
-        System.out.println("Numero Cuenta = " + colones.getNumeroCuenta());
-        System.out.println("Saldo Disponible = " + colones.getSaldo() + " colones\n");
-        }else{
+        String cliente = leer.nextLine();
+        if (buscarCliente(cliente)) {
+            Cuenta colones = new Cuenta();
+            Random rc = new Random();
+            dig16 = rc.nextLong(9000000000000000L) + 1000000000000000L;
+            String cColones = String.valueOf("CR" + dig16);
+            colones.setNumeroCuenta(cColones);
+            System.out.println("\nIngrese el monto inicial de la cuenta");
+            saldo = leer.nextDouble();
+            colones.setCedulaDueño(cliente);
+            colones.setSaldo(saldo);
+            cuentas.add(colones);
+            System.out.println("**********Cuenta Creada***********");
+            System.out.println("Numero Cuenta = " + colones.getNumeroCuenta());
+            System.out.println("Saldo Disponible = " + colones.getSaldo() + " colones\n");
+        } else {
             System.out.println("Cliente no existe, no se le puede abrir cuenta");
         }
-        
+
     }
 
     public static void retiro(String cuenta, Cuenta c, double monto, double m) {
@@ -408,7 +448,7 @@ public class Banco {
         }
         if (pos != -1) {
             System.out.println("\n==========Retiro exitoso===========");
-            System.out.println("\nMonto retirado: "+monto);
+            System.out.println("\nMonto retirado: " + monto);
             System.out.println("\n============Informacion de Cuenta==============");
             System.out.println(cuentas.get(pos));
             System.out.println("====================================");
@@ -416,14 +456,15 @@ public class Banco {
             System.out.println("\nLa cuenta digitada no existe en nuestra base de datos");
         }
     }
-    int contaDeTransferencia = 0;
+    static int contaDeTransferencia = 0;
 
-    public void transferencia(Cuenta c1, Cuenta c2) {
+    public static void transferencia(Cuenta c1, Cuenta c2) {
         System.out.println("Monto a trasferir");
         Scanner leer = new Scanner(System.in);
         double monto = leer.nextDouble();
         contaDeTransferencia++;
         Transferencia t1 = new Transferencia(c1, c2, contaDeTransferencia, c1.getNumeroCuenta() + " / " + c2.numeroCuenta, monto, c1.getSaldo());
+        transferencia.add(t1);
         System.out.println("");
     }
 
