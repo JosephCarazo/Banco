@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class Banco {
 
     private static ArrayList<Cliente> cliente = new ArrayList<>();
-    protected static ArrayList<Cuenta> cuentas = new ArrayList<>();
+   
     protected static ArrayList<Transferencia> transferencia = new ArrayList<>();
 
     public static void menuPrincipal() {
@@ -162,6 +162,28 @@ public class Banco {
 
         }
     }
+    private static void buscarCuenta(){
+        Scanner leer = new Scanner(System.in);
+        System.out.println("Escriba la cedula del cliente");
+        String cedula=leer.nextLine();
+        if(retornarCliente(cedula)!=null){
+            System.out.println("Escriba el numero de cuenta");
+            String nCuenta=leer.nextLine();
+          retornarCliente(cedula).buscarCuentaPos(nCuenta);
+        }
+        
+        
+    }
+    private static void eliminarCuenta(){
+    Scanner leer = new Scanner(System.in);
+        System.out.println("Escriba la cedula del cliente");
+        String cedula=leer.nextLine();
+        if(retornarCliente(cedula)!=null){
+            System.out.println("Escriba el numero de cuenta");
+            String nCuenta=leer.nextLine();
+          retornarCliente(cedula).eliminarCuenta();
+        }
+    }
 
     //Metodo para crear cuenta y agregar al arraylist
     public static void crearCuenta() {
@@ -189,64 +211,12 @@ public class Banco {
     }
 
     // Metodo para buscar cuenta
-    public static void buscarCuenta() {
-        Scanner leer = new Scanner(System.in);
-        System.out.println("\nDigite el numero de cuenta que quiere buscar");
-        String cuenta = leer.next();
+   
 
-        int pos = -1;
-        for (int i = 0; i < cuentas.size(); i++) {
-            if (cuentas.get(i).getNumeroCuenta().equals(cuenta)) {
-                pos = i;
-            }
-        }
-        if (pos != -1) {
-            System.out.println("\n*** CUENTA ENCONTRADA ***" + cuentas.get(pos) + "\nPosicion : " + pos + "\n************************\n");
-
-        } else {
-            System.out.println("\nLa cuenta digitada no existe en la base de datos\n\n");
-        }
-
-    }
-
-    public static Cuenta buscarCuentaPos(String numdeCuenta) {
-        for (Cuenta cuent : cuentas) {
-            if (cuent.getNumeroCuenta().equals(numdeCuenta)) {
-                System.out.println("Esta cuenta si existe: ");
-                System.out.println(cuent);
-                return cuent;
-
-            } else {
-                System.out.println("Esa cuenta no existe "+numdeCuenta);
-
-            }
-
-        }
-        return null;
-
-    }
+    
 
     //Metodo para eliminar cuenta
-    public static void eliminarCuenta() {
-        Scanner leer = new Scanner(System.in);
-        System.out.println("\nIngrese la cuenta que desea eliminar ");
-        String cuenta = leer.next();
-        int pos = -1;
-        for (int i = 0; i < cuentas.size(); i++) {
-            if (cuentas.get(i).getNumeroCuenta().equals(cuenta)) {
-                if (cuentas.get(i).getSaldo() == 0) {// revisa si la cuenta solicitada esta en cero 
-                    pos = i;
-                    cuentas.remove(pos);
-                }
-            }
-        }
-        if (pos != -1) {
-            System.out.println("\n** CUENTA ELIMINADA ** \n");
-        } else {
-            System.out.println("\nLa cuenta no se puede eliminar porque no esta en cero o no existe\n");
-        }
-    }
-
+   
     //ESTE METODO AÑADE UN NUEVO CLIENTE
     public static void nuevoCliente() {
         Cliente cl = new Cliente();
@@ -358,6 +328,21 @@ public class Banco {
 
         }
         return validacion;
+    }
+        public static Cliente retornarCliente(String cedula) {
+        for (Cliente clientes : cliente) {
+            if (clientes.getCedula().equals(cedula)) {
+                System.out.println("Este cliente si existe: ");
+                System.out.println("");
+                System.out.println(clientes);
+                return clientes;
+            } else {
+                System.out.println("Este cliente no existe");
+                
+            }
+
+        }
+        return null;
     }
 
     public static void deposito(String cuenta, double monto, Cuenta c, double m) {
