@@ -351,8 +351,19 @@ public class Banco {
         return null;
     }
 
-    public static void deposito(String cuenta, double monto, Cuenta c, double m) {
+    public static void deposito() {
    //-------------------------voy por aqui
+       
+        Scanner leer = new Scanner(System.in);
+        System.out.println("Escriba su numero de Cedula");
+        String cedula=leer.nextLine();
+        System.out.println("Escriba su numero de cuenta");
+        String cuenta=leer.nextLine();
+        if (retornarCliente(cedula)!=null||retornarCliente(cedula).buscarCuentaPos(cuenta)!=null){
+            System.out.println("Escriba el monto a depositar");
+            
+        }
+        
         if (pos != -1) {
             System.out.println("\n==========Retiro exitoso===========");
             System.out.println("\nMonto Depositado: " + monto);
