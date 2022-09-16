@@ -10,7 +10,7 @@ package banco;
  */
 public class TarjetaDebito extends Tarjeta {
 
-    public TarjetaDebito(String numeroTarjeta, String cuenta) {
+    public TarjetaDebito(String numeroTarjeta, Cuenta cuenta) {
         super(numeroTarjeta, cuenta);
     }
 
