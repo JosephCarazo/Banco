@@ -148,9 +148,11 @@ public class Banco {
         Scanner leer = new Scanner(System.in);
         System.out.println("\nDigite una opcion\n1- Crear nueva cuenta\n2- Buscar cuenta\n3- Eliminar Cuenta\n4- Menu Principal");
         int op = leer.nextInt();
+        
         switch (op) {
             case 1 -> {
-                crearCuenta();
+                //buscar cliente 
+                crearCuenta(c1);
                 menuPrincipal();
             }
             case 2 -> {
@@ -196,25 +198,26 @@ public class Banco {
     }
 
     //Metodo para crear cuenta y agregar al arraylist
-    public static void crearCuenta() {
+    public static void crearCuenta(Cliente c1) {
         Scanner leer = new Scanner(System.in);
         System.out.println("\nDigite una opcion\n1- Crear cuenta Colones\n2- Crear cuenta Dolares\n3- Salir");
         int op = leer.nextInt();
         long dig16 = 0;//Se guarda el numero aleatorio para la cuenta
         double saldo = 0;
+        
         switch (op) {
             case 1:
-                cuentaColones(dig16, saldo);
+                cuentaColones(dig16, saldo,c1);
                 menuPrincipal();
             case 2:
-                cuentaDolares(dig16, saldo);
+                cuentaDolares(dig16, saldo,c1);
                 menuPrincipal();
             case 3:
                 menuPrincipal();
                 break;
             default:
                 System.out.println("Digite una opcion correcta");
-                crearCuenta();
+                crearCuenta(c1);
 
         }
 
@@ -374,23 +377,26 @@ public class Banco {
             System.out.println("La cuenta digitada no existe en la base de datos");
         }
     }
+    public static String generaNCDolares(){
+        Random rd = new Random();
+        String nCuenta="";
+        long dig16 = rd.nextLong(9000000000000000L) + 1000000000000000L;
+        nCuenta = String.valueOf("CR" + dig16);
+        
+       return nCuenta;
+    }
 
-    public static void cuentaDolares(long dig16, double saldo) {
+    public static void cuentaDolares(long dig16, double saldo,Cliente c1) {
         Scanner leer = new Scanner(System.in);
         System.out.println("Escriba la cedula del cliente");
         String cliente = leer.nextLine();
         if (buscarCliente(cliente)) {
-
-            Cuenta dolares = new Cuenta();
-            Random rd = new Random();
-            dig16 = rd.nextLong(9000000000000000L) + 1000000000000000L;
-            String nCuenta = String.valueOf("CR" + dig16);
-            dolares.setNumeroCuenta(nCuenta);
             System.out.println("\nIngrese el monto inicial de la cuenta");
             saldo = leer.nextDouble();
-            dolares.setSaldo(saldo);
-            dolares.setCedulaDueño(cliente);
-            cuentas.add(dolares);
+            String nCuenta= generaNCDolares();
+            Cuenta dolares = new Cuenta(nCuenta,saldo);
+            c1.cuentas.add(dolares);
+            
             System.out.println("**********Cuenta Creada***********");
             System.out.println("Numero Cuenta = " + dolares.getNumeroCuenta());
             System.out.println("Saldo Disponible = " + dolares.getSaldo() + " dolares\n");

@@ -19,7 +19,7 @@ public class Cliente {
     private String telefono;
     private String correo;
     private boolean tarjetaCredito;
-    private static ArrayList<Cuenta> cuentas = new ArrayList<>();
+    protected ArrayList<Cuenta> cuentas = new ArrayList<>();
 
     public String getCedula() {
         return cedula;
@@ -115,7 +115,7 @@ public class Cliente {
         return validacion;
     }
 
-    public static void buscarCuenta() {
+    public void buscarCuenta() {
         Scanner leer = new Scanner(System.in);
         System.out.println("\nDigite el numero de cuenta que quiere buscar");
         String cuenta = leer.next();

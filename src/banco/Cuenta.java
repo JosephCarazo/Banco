@@ -9,17 +9,11 @@ package banco;
  * @author joans
  */
 public class Cuenta {
-   protected String cedulaDueño;
+   
    protected String numeroCuenta;
    protected double saldo;
 
     public Cuenta(String numeroCuenta, double saldo) {
-        this.numeroCuenta = numeroCuenta;
-        this.saldo = saldo;
-    }
-
-    public Cuenta(String cedulaDueño, String numeroCuenta, double saldo) {
-        this.cedulaDueño = cedulaDueño;
         this.numeroCuenta = numeroCuenta;
         this.saldo = saldo;
     }
@@ -30,23 +24,14 @@ public class Cuenta {
 
     public Cuenta() {
     }
-
-    public String getCedulaDueño() {
-        return cedulaDueño;
-    }
-
-    public void setCedulaDueño(String cedulaDueño) {
-        this.cedulaDueño = cedulaDueño;
-    }
     
-
     public String getNumeroCuenta() {
         return numeroCuenta;
     }
 
-    public void setNumeroCuenta(String numeroCuenta) {
-        this.numeroCuenta = numeroCuenta;
-    }
+//    public void setNumeroCuenta(String numeroCuenta) {
+//        this.numeroCuenta = numeroCuenta;
+//    }
 
     public double getSaldo() {
         return saldo;
