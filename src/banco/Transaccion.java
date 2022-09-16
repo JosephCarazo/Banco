@@ -23,12 +23,12 @@ public abstract class Transaccion {
         return id;
     }
 
-    public Transaccion(int id, String cuenta, double monto, double saldoAnterior) {
+    public Transaccion(Cuenta c,int id, String cuenta, double monto) {
         this.id = id;
         this.cuenta = cuenta;
         this.monto = monto;
-        this.saldoAnterior = saldoAnterior;
-        this.fechaHora="";
+        this.saldoAnterior = c.getSaldo();
+        this.fechaHora=String.valueOf(LocalDateTime.now());
     }
 
     public void setId(int id) {

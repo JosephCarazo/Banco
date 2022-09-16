@@ -361,7 +361,7 @@ public class Banco {
         String cuenta=leer.nextLine();
         if (retornarCliente(cedula)!=null||retornarCliente(cedula).buscarCuentaPos(cuenta)!=null){
             System.out.println("Escriba el monto a depositar");
-            
+            double 
         }
         
         if (pos != -1) {
