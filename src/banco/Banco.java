@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class Banco {
 
     private static ArrayList<Cliente> cliente = new ArrayList<>();
-   
+
     protected static ArrayList<Transferencia> transferencia = new ArrayList<>();
 
     public static void menuPrincipal() {
@@ -78,7 +78,7 @@ public class Banco {
                 menuPrincipal();
             case 2:
                 System.out.println("Escriba el numero de cedula del Cliente a buscar");
-                String Ccliente= leer.nextLine();
+                String Ccliente = leer.nextLine();
                 buscarCliente(Ccliente); //QUE PASO ACA??
                 menuPrincipal();
             case 3:
@@ -115,23 +115,32 @@ public class Banco {
                 retiro(cuenta, c, monto, m);
                 menuPrincipal();
             case 3:
-                submenuTrasferencia();
+                subTrasferencia();
                 menuPrincipal();
         }
     }
 
-    private static void submenuTrasferencia() {
+    private static void subTrasferencia() {
         String Cuenta1, Cuenta2;
         Scanner leer = new Scanner(System.in);
-        System.out.println("Cuenta 1");
+        System.out.println("Escriba el numero de cedula de la persona");
+        String cliente1 = leer.nextLine();
+        System.out.println("Cuenta de " + cliente1);
         Cuenta1 = leer.nextLine();
-        System.out.println("Cuenta 2");
+        System.out.println("Escriba el numero de cedula de la persona a enviar la tranferencia");
+        String cliente2 = leer.nextLine();
+        System.out.println("Cuenta de " + cliente2);
         Cuenta2 = leer.nextLine();
-        if (buscarCuentaPos(Cuenta1) == null || buscarCuentaPos(Cuenta2) == null) {
-            System.out.println("Cuentas no encontrada");
+        if (buscarCliente(cliente1)||buscarCliente(cliente2)||retornarCliente(cliente1)==null||retornarCliente(cliente2)==null){
+            System.out.println("Error");
+        }else{
+        if ( retornarCliente(cliente1).buscarCuentaPos(Cuenta1)== null || retornarCliente(cliente2).buscarCuentaPos(Cuenta2) == null) {
+            System.out.println("Cuentas no encontradas");
         } else {
-            transferencia(buscarCuentaPos(Cuenta1), buscarCuentaPos(Cuenta2));
+            transferencia(retornarCliente(cliente1).buscarCuentaPos(Cuenta1), retornarCliente(cliente2).buscarCuentaPos(Cuenta2));
         }
+        }
+        
     }
 
     // Menu que nuestra las opciones de la cuenta
@@ -162,26 +171,27 @@ public class Banco {
 
         }
     }
-    private static void buscarCuenta(){
+
+    private static void buscarCuenta() {
         Scanner leer = new Scanner(System.in);
         System.out.println("Escriba la cedula del cliente");
-        String cedula=leer.nextLine();
-        if(retornarCliente(cedula)!=null){
+        String cedula = leer.nextLine();
+        if (retornarCliente(cedula) != null) {
             System.out.println("Escriba el numero de cuenta");
-            String nCuenta=leer.nextLine();
-          retornarCliente(cedula).buscarCuentaPos(nCuenta);
+            String nCuenta = leer.nextLine();
+            retornarCliente(cedula).buscarCuentaPos(nCuenta);
         }
-        
-        
+
     }
-    private static void eliminarCuenta(){
-    Scanner leer = new Scanner(System.in);
+
+    private static void eliminarCuenta() {
+        Scanner leer = new Scanner(System.in);
         System.out.println("Escriba la cedula del cliente");
-        String cedula=leer.nextLine();
-        if(retornarCliente(cedula)!=null){
+        String cedula = leer.nextLine();
+        if (retornarCliente(cedula) != null) {
             System.out.println("Escriba el numero de cuenta");
-            String nCuenta=leer.nextLine();
-          retornarCliente(cedula).eliminarCuenta();
+            String nCuenta = leer.nextLine();
+            retornarCliente(cedula).eliminarCuenta();
         }
     }
 
@@ -211,12 +221,7 @@ public class Banco {
     }
 
     // Metodo para buscar cuenta
-   
-
-    
-
     //Metodo para eliminar cuenta
-   
     //ESTE METODO AÑADE UN NUEVO CLIENTE
     public static void nuevoCliente() {
         Cliente cl = new Cliente();
@@ -329,7 +334,8 @@ public class Banco {
         }
         return validacion;
     }
-        public static Cliente retornarCliente(String cedula) {
+
+    public static Cliente retornarCliente(String cedula) {
         for (Cliente clientes : cliente) {
             if (clientes.getCedula().equals(cedula)) {
                 System.out.println("Este cliente si existe: ");
@@ -338,7 +344,7 @@ public class Banco {
                 return clientes;
             } else {
                 System.out.println("Este cliente no existe");
-                
+
             }
 
         }
@@ -346,21 +352,7 @@ public class Banco {
     }
 
     public static void deposito(String cuenta, double monto, Cuenta c, double m) {
-        int pos = -1;
-        for (int i = 0; i < cuentas.size(); i++) {
-
-            if (cuentas.get(i).getNumeroCuenta().equals(cuenta)) {
-                pos = i;
-                m = cuentas.get(pos).getSaldo();// obtenemos saldo de la cuenta
-//                        depo.deposito(c, monto);
-
-//                        depo.setCuenta(c.getNumeroCuenta());
-//                        cuentas.set(pos, c);
-                c.setSaldo(m + monto);
-                c.setNumeroCuenta(cuenta);
-                cuentas.set(pos, c);
-            }
-        }
+   //-------------------------voy por aqui
         if (pos != -1) {
             System.out.println("\n==========Retiro exitoso===========");
             System.out.println("\nMonto Depositado: " + monto);
