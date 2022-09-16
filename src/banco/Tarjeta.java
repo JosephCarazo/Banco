@@ -12,8 +12,8 @@ import java.util.Random;
  */
 public abstract class Tarjeta {
 
-    private String numeroTarjeta;
-    private String cuenta;
+    protected String numeroTarjeta;
+    protected Cuenta cuenta;
 
     public String getNumeroTarjeta() {
         return numeroTarjeta;
@@ -23,15 +23,15 @@ public abstract class Tarjeta {
         this.numeroTarjeta = numeroTarjeta;
     }
 
-    public String getCuenta() {
+    public Cuenta getCuenta() {
         return cuenta;
     }
 
-    public void setCuenta(String cuenta) {
+    public void setCuenta(Cuenta cuenta) {
         this.cuenta = cuenta;
     }
 
-    public Tarjeta(String numeroTarjeta, String cuenta) {
+    public Tarjeta(String numeroTarjeta, Cuenta cuenta) {
         generarNumeroTarjeta();
         this.cuenta = cuenta;
     }

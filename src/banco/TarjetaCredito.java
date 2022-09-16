@@ -4,9 +4,9 @@
  */
 package banco;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
+
+
 
 /**
  *
@@ -14,15 +14,15 @@ import java.util.Date;
  */
 public class TarjetaCredito extends Tarjeta {
 
-    private Date fechaCorte;
+    private String fechaCorte;
     private double saldo;
     private double limite;
 
-    public Date getFechaCorte() {
+    public String getFechaCorte() {
         return fechaCorte;
     }
 
-    public void setFechaCorte(Date fechaCorte) {
+    public void setFechaCorte(String fechaCorte) {
         this.fechaCorte = fechaCorte;
     }
 
@@ -42,25 +42,20 @@ public class TarjetaCredito extends Tarjeta {
         this.limite = limite;
     }
 
-    public TarjetaCredito(Date fechaCorte, double saldo, double limite, String numeroTarjeta, String cuenta) {
+    public TarjetaCredito(double saldo, double limite, String numeroTarjeta, Cuenta cuenta) {
         super(numeroTarjeta, cuenta);
-        this.fechaCorte = fechaCorte;
+        calcularFechaCorte(30);
         this.saldo = saldo;
         this.limite = limite;
     }
 
-    public static Date obtenerFechaAcutal() {
-        Date fecha = new Date();
-        return fecha;
+    public TarjetaCredito() {
+        this(0, 0, null, null);
     }
 
-    public Date calcularFechaCorte(int dias) {
-        if (dias == 0) {
-            return obtenerFechaAcutal();
-        }
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(obtenerFechaAcutal());
-        calendar.add(Calendar.DATE, dias);
-        return this.fechaCorte =  calendar.getTime();
+    public void calcularFechaCorte(int cantidadDeDias) {
+        String fechaC = String.valueOf(LocalDate.now().plusDays(cantidadDeDias));
+        this.fechaCorte = fechaC;
     }
+
 }

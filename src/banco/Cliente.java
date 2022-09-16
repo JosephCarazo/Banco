@@ -86,9 +86,15 @@ public class Cliente {
         this.cedula = cedula;
     }
 
-    public void validarTarjetaC() {
+    public void agregarTarjetaC() {
+        Scanner leer = new Scanner(System.in);
         if (isTarjetaCredito()) {
             System.out.println("Usted ya posee una tarjeta de credito");
+        }else{
+            this.tarjetaCredito = true;
+            //Se trabajaría con el saldo
+            //Se haria lo del limite
+            Tarjeta tarjetaC = new TarjetaCredito();
         }
     }
 
