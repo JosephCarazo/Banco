@@ -23,7 +23,7 @@ public abstract class Transaccion {
         return id;
     }
 
-    public Transaccion(Cuenta c,int id, String cuenta, double monto) {
+    public Transaccion(Cuenta c,int id, String cuenta, double monto) { //Para deposito y retiro
         this.id = id;
         this.cuenta = cuenta;
         this.monto = monto;
