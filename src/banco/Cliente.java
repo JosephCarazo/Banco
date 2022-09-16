@@ -4,10 +4,6 @@
  */
 package banco;
 
-import java.io.PrintStream;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,6 +18,7 @@ public class Cliente {
     private String fechaNacimiento;
     private String telefono;
     private String correo;
+    private boolean tarjetaCredito;
     private static ArrayList<Cuenta> cuentas = new ArrayList<>();
 
     public String getCedula() {
@@ -64,20 +61,35 @@ public class Cliente {
         this.correo = correo;
     }
 
-    public Cliente(String cedula, String nombre, String fechaNacimiento, String telefono, String correo) {
+    public boolean isTarjetaCredito() {
+        return tarjetaCredito;
+    }
+
+    public void setTarjetaCredito(boolean tarjetaCredito) {
+        this.tarjetaCredito = tarjetaCredito;
+    }
+
+    public Cliente(String cedula, String nombre, String fechaNacimiento, String telefono, String correo, boolean tarjetaCredito) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
         this.telefono = telefono;
         this.correo = correo;
+        this.tarjetaCredito = tarjetaCredito;
     }
 
     public Cliente() {
-        this("000000000", "Usuario", null, null, null);
+        this("000000000", "Usuario", null, null, null, false);
     }
 
     public Cliente(String cedula) {
         this.cedula = cedula;
+    }
+
+    public void validarTarjetaC() {
+        if (isTarjetaCredito()) {
+            System.out.println("Usted ya posee una tarjeta de credito");
+        }
     }
 
     public boolean validarCedula(String cedula) {
@@ -97,11 +109,7 @@ public class Cliente {
         return validacion;
     }
 
-    @Override
-    public String toString() {
-        return "Cliente" + "\nCedula: " + cedula + "\nNombre: " + nombre + "\nFechaNacimiento: " + fechaNacimiento + "\nTelefono: " + telefono + "\nCorreo: " + correo;
-    }
- public static void buscarCuenta() {
+    public static void buscarCuenta() {
         Scanner leer = new Scanner(System.in);
         System.out.println("\nDigite el numero de cuenta que quiere buscar");
         String cuenta = leer.next();
@@ -120,7 +128,8 @@ public class Cliente {
         }
 
     }
- public Cuenta buscarCuentaPos(String numdeCuenta) {
+
+    public Cuenta buscarCuentaPos(String numdeCuenta) {
         for (Cuenta cuent : cuentas) {
             if (cuent.getNumeroCuenta().equals(numdeCuenta)) {
                 System.out.println("Esta cuenta si existe: ");
@@ -128,7 +137,7 @@ public class Cliente {
                 return cuent;
 
             } else {
-                System.out.println("Esa cuenta no existe "+numdeCuenta);
+                System.out.println("Esa cuenta no existe " + numdeCuenta);
 
             }
 
@@ -136,7 +145,8 @@ public class Cliente {
         return null;
 
     }
-  public  void eliminarCuenta() {
+
+    public void eliminarCuenta() {
         Scanner leer = new Scanner(System.in);
         System.out.println("\nIngrese la cuenta que desea eliminar ");
         String cuenta = leer.next();
@@ -154,6 +164,11 @@ public class Cliente {
         } else {
             System.out.println("\nLa cuenta no se puede eliminar porque no esta en cero o no existe\n");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente" + "\nCedula: " + cedula + "\nNombre: " + nombre + "\nFechaNacimiento: " + fechaNacimiento + "\nTelefono: " + telefono + "\nCorreo: " + correo;
     }
 
 }

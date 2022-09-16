@@ -4,19 +4,22 @@
  */
 package banco;
 
+import java.util.Random;
+
 /**
  *
  * @author Francisco
  */
-public class Tarjeta {
-    private int numeroTarjeta;
+public abstract class Tarjeta {
+
+    private String numeroTarjeta;
     private String cuenta;
 
-    public int getNumeroTarjeta() {
+    public String getNumeroTarjeta() {
         return numeroTarjeta;
     }
 
-    public void setNumeroTarjeta(int numeroTarjeta) {
+    public void setNumeroTarjeta(String numeroTarjeta) {
         this.numeroTarjeta = numeroTarjeta;
     }
 
@@ -28,11 +31,15 @@ public class Tarjeta {
         this.cuenta = cuenta;
     }
 
-    public Tarjeta(int numeroTarjeta, String cuenta) {
-        this.numeroTarjeta = numeroTarjeta;
+    public Tarjeta(String numeroTarjeta, String cuenta) {
+        generarNumeroTarjeta();
         this.cuenta = cuenta;
     }
-    
-     
-    
+
+    public void generarNumeroTarjeta() {
+        Random rd = new Random();
+        long dig16 = rd.nextLong(9000000000000000L) + 1000000000000000L;
+        String numTarjeta = String.valueOf(dig16);
+        this.numeroTarjeta = numTarjeta;
+    }
 }
