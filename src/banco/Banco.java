@@ -377,7 +377,8 @@ public class Banco {
             System.out.println("La cuenta digitada no existe en la base de datos");
         }
     }
-    public static String generaNCDolares(){
+    // Metodo para generar el numero de cuenta
+    public static String generaNumeroCuenta(){
         Random rd = new Random();
         String nCuenta="";
         long dig16 = rd.nextLong(9000000000000000L) + 1000000000000000L;
@@ -393,7 +394,7 @@ public class Banco {
         if (buscarCliente(cliente)) {
             System.out.println("\nIngrese el monto inicial de la cuenta");
             saldo = leer.nextDouble();
-            String nCuenta= generaNCDolares();
+            String nCuenta= generaNumeroCuenta();
             Cuenta dolares = new Cuenta(nCuenta,saldo);
             c1.cuentas.add(dolares);
             
@@ -405,21 +406,17 @@ public class Banco {
         }
     }
 
-    public static void cuentaColones(long dig16, double saldo) {
+    public static void cuentaColones(long dig16, double saldo, Cliente c1) {
         Scanner leer = new Scanner(System.in);
         System.out.println("Escriba el numero de cédula cliente");
         String cliente = leer.nextLine();
         if (buscarCliente(cliente)) {
-            Cuenta colones = new Cuenta();
-            Random rc = new Random();
-            dig16 = rc.nextLong(9000000000000000L) + 1000000000000000L;
-            String cColones = String.valueOf("CR" + dig16);
-            colones.setNumeroCuenta(cColones);
             System.out.println("\nIngrese el monto inicial de la cuenta");
             saldo = leer.nextDouble();
-            colones.setCedulaDueño(cliente);
-            colones.setSaldo(saldo);
-            cuentas.add(colones);
+            String nCuenta= generaNumeroCuenta();
+            Cuenta colones = new Cuenta(nCuenta,saldo);
+            c1.cuentas.add(colones);
+            
             System.out.println("**********Cuenta Creada***********");
             System.out.println("Numero Cuenta = " + colones.getNumeroCuenta());
             System.out.println("Saldo Disponible = " + colones.getSaldo() + " colones\n");
