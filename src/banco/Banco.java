@@ -449,7 +449,7 @@ public class Banco {
         Scanner leer = new Scanner(System.in);
         double monto = leer.nextDouble();
         contaDeTransferencia++;
-        Transferencia t1 = new Transferencia(c1, c2, contaDeTransferencia, c1.getNumeroCuenta() + " / " + c2.numeroCuenta, monto, c1.getSaldo());
+        Transferencia t1 = new Transferencia(c1, c2, contaDeTransferencia, monto);
         transferencia.add(t1);
         System.out.println("");
     }
