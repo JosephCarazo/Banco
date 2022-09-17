@@ -172,6 +172,10 @@ public class Cliente {
         }
     }
 
+    public void setCuentas(Cuenta cuentas) {
+        this.cuentas.add(cuentas);
+    }
+
     @Override
     public String toString() {
         return "Cliente" + "\nCedula: " + cedula + "\nNombre: " + nombre + "\nFechaNacimiento: " + fechaNacimiento + "\nTelefono: " + telefono + "\nCorreo: " + correo;

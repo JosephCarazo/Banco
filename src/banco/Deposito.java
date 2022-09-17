@@ -12,8 +12,8 @@ public class Deposito extends Transaccion {
 
     
 
-    public Deposito(int id,Cuenta c,String cuentaDestino, double monto) {
-        super(c,id,cuentaDestino, monto);
+    public Deposito(int id,Cuenta c, double monto) {
+        super(c,id,monto);
         c.setSaldo(c.getSaldo()+monto);
     }
 

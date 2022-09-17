@@ -23,9 +23,9 @@ public abstract class Transaccion {
         return id;
     }
 
-    public Transaccion(Cuenta c,int id, String cuenta, double monto) { //Para deposito y retiro
+    public Transaccion(Cuenta c,int id, double monto) { //Para deposito y retiro
         this.id = id;
-        this.cuenta = cuenta;
+        this.cuenta = c.getNumeroCuenta();
         this.monto = monto;
         this.saldoAnterior = c.getSaldo();
         this.fechaHora=String.valueOf(LocalDateTime.now());
@@ -79,17 +79,15 @@ public abstract class Transaccion {
         this.id = (int) (Math.random() * 1000000);
     }
     
-    public void fechaHora(){
-        this.fechaHora = String.valueOf(LocalDateTime.now());
-    }
+    
 
-    public Transaccion(String cuenta, double monto) {
+    public Transaccion(Cuenta c1,Cuenta c2,double monto) {
         generarId();
-        fechaHora();
-        this.cuenta = cuenta;
+        this.fechaHora = String.valueOf(LocalDateTime.now());
+        this.cuenta = c1.getNumeroCuenta();
         this.monto = monto;
-        this.saldoAnterior = saldoFinal + monto;
-        this.saldoFinal = saldoFinal - monto;
+        this.saldoAnterior = c1.getSaldo();
+        this.saldoFinal = c2.getSaldo()+monto;
     }
 
     @Override

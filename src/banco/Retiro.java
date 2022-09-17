@@ -10,8 +10,10 @@ package banco;
  */
 public class Retiro extends Transaccion {
 
-    public Retiro(String cuenta, double monto) {
-        super(cuenta, monto);
+    public Retiro(int id,Cuenta c, double monto) {
+       super(c,id,monto);
+        c.setSaldo(c.getSaldo()-monto);
+
     }
 
 }
