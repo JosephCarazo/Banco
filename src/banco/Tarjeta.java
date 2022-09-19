@@ -31,7 +31,7 @@ public abstract class Tarjeta {
         this.cuenta = cuenta;
     }
 
-    public Tarjeta(String numeroTarjeta, Cuenta cuenta) {
+    public Tarjeta(Cuenta cuenta) {
         generarNumeroTarjeta();
         this.cuenta = cuenta;
     }

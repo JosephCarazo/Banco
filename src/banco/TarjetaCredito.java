@@ -42,20 +42,31 @@ public class TarjetaCredito extends Tarjeta {
         this.limite = limite;
     }
 
-    public TarjetaCredito(double saldo, double limite, String numeroTarjeta, Cuenta cuenta) {
-        super(numeroTarjeta, cuenta);
+    public TarjetaCredito(double saldo, double limite, Cuenta cuenta) {
+        super(cuenta);
         calcularFechaCorte(30);
+        this.generarNumeroTarjeta();
         this.saldo = saldo;
         this.limite = limite;
     }
 
     public TarjetaCredito() {
-        this(0, 0, null, null);
+        this(0, 0, null);
     }
 
+    @Override
+    public void generarNumeroTarjeta() {
+        super.generarNumeroTarjeta();
+    }
     public void calcularFechaCorte(int cantidadDeDias) {
         String fechaC = String.valueOf(LocalDate.now().plusDays(cantidadDeDias));
         this.fechaCorte = fechaC;
     }
 
+    @Override
+    public String toString() {
+        return "*** Tarjeta Credito ***" + "\nNumero tarjeta: " + this.numeroTarjeta + "\nCuenta: " + this.cuenta +"\nFecha Corte: " + fechaCorte + "\nSaldo: " + saldo + "\nLimite: " + limite;
+    }
+
+    
 }

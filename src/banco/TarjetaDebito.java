@@ -10,8 +10,14 @@ package banco;
  */
 public class TarjetaDebito extends Tarjeta {
 
-    public TarjetaDebito(String numeroTarjeta, Cuenta cuenta) {
-        super(numeroTarjeta, cuenta);
+    public TarjetaDebito(Cuenta cuenta) {
+        super(cuenta);
+        this.generarNumeroTarjeta();
+    }
+
+    @Override
+    public void generarNumeroTarjeta() {
+        super.generarNumeroTarjeta();
     }
 
 }

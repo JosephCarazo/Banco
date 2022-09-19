@@ -464,5 +464,7 @@ public class Banco {
      */
     public static void main(String[] args) {
 //        menuPrincipal();
+        Tarjeta tj = new TarjetaCredito();
+        System.out.println(tj);
     }
 }
