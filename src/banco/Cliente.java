@@ -18,7 +18,7 @@ public class Cliente {
     private String fechaNacimiento;
     private String telefono;
     private String correo;
-    private boolean tarjetaCredito;
+    private TarjetaCredito tarjetaCredito;
     protected ArrayList<Cuenta> cuentas = new ArrayList<>();
 
     public String getCedula() {
@@ -61,15 +61,15 @@ public class Cliente {
         this.correo = correo;
     }
 
-    public boolean isTarjetaCredito() {
+    public TarjetaCredito getTarjetaCredito() {
         return tarjetaCredito;
     }
 
-    public void setTarjetaCredito(boolean tarjetaCredito) {
+    public void setTarjetaCredito(TarjetaCredito tarjetaCredito) {
         this.tarjetaCredito = tarjetaCredito;
     }
 
-    public Cliente(String cedula, String nombre, String fechaNacimiento, String telefono, String correo, boolean tarjetaCredito) {
+    public Cliente(String cedula, String nombre, String fechaNacimiento, String telefono, String correo, TarjetaCredito tarjetaCredito) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
@@ -79,22 +79,24 @@ public class Cliente {
     }
 
     public Cliente() {
-        this("000000000", "Usuario", null, null, null, false);
+        this("000000000", "Usuario", null, null, null, null);
     }
 
     public Cliente(String cedula) {
         this.cedula = cedula;
     }
 
-    public void agregarTarjetaC() {
+    public void agregarTarjetaC() {//ultimo hecho por joseph
         Scanner leer = new Scanner(System.in);
-        if (isTarjetaCredito()) {
+        if (this.tarjetaCredito != null) {
             System.out.println("Usted ya posee una tarjeta de credito");
-        }else{
-            this.tarjetaCredito = true;
-            //Se trabajaría con el saldo
-            //Se haria lo del limite
-            Tarjeta tarjetaC = new TarjetaCredito();
+        } else {
+            TarjetaCredito tarjetaC = new TarjetaCredito();
+            System.out.println("Digite el saldo de su tarjeta de crédito");
+            int saldo = leer.nextInt();
+            tarjetaC.setSaldo(saldo);
+            this.tarjetaCredito = tarjetaC;
+            System.out.println(tarjetaC);
         }
     }
 
