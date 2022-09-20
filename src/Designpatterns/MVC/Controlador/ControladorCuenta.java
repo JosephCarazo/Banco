@@ -4,9 +4,10 @@
  */
 package Designpatterns.MVC.Controlador;
 
+import Designpatterns.MVC.MODELO.Cuenta;
 import Designpatterns.MVC.MODELO.DataBase;
 import DesingPatterns.MVC.Vista.VistaConsolaCuenta;
-import banco.Cuenta;
+
 
 /**
  *
@@ -24,8 +25,20 @@ public class ControladorCuenta {
     public void setModelo(Cuenta modelo) {
         this.modelo = modelo;
     }
+
+    public ControladorCuenta(VistaConsolaCuenta vista, Cuenta modelo, DataBase tabla) {
+        this.vista = vista;
+        this.modelo = modelo;
+        this.tabla = tabla;
+    }
     
-    public void add(){
+    public void agregar(){
+    if (tabla.Buscar(modelo.getNumeroCuenta())==null){
+        tabla.add(modelo);
+    }
+    }
+    
+    public void buscar(){
     
     }
     
