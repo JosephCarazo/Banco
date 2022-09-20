@@ -17,6 +17,11 @@ public class CuentaColones extends Cuenta {
 
     }
 
+    public CuentaColones(String numeroCuenta) {
+        super(numeroCuenta);
+    }
+    
+
 
 
 }

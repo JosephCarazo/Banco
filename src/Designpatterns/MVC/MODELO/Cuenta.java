@@ -19,9 +19,11 @@ public class Cuenta {
         this.numeroCuenta = numeroCuenta;
         this.saldo = saldo;
     }
+    
 
     public Cuenta(String numeroCuenta) {
         this.numeroCuenta = numeroCuenta;
+        this.saldo=0;
     }
 
     public Cuenta() {
