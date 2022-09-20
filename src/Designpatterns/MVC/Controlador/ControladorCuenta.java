@@ -39,7 +39,12 @@ public class ControladorCuenta {
     }
     
     public void buscar(){
-    
+    Cuenta cuenta = tabla.Buscar(modelo.getNumeroCuenta());
+    if (cuenta==null){
+    //Vista Indicar error
+    }else{
+    //Vista Muestre cuenta
+    }
     }
     
 }
