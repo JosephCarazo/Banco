@@ -4,6 +4,7 @@
  */
 package Designpatterns.MVC.Controlador;
 
+import Designpatterns.MVC.MODELO.DataBase;
 import DesingPatterns.MVC.Vista.VistaConsolaCuenta;
 import banco.Cuenta;
 
@@ -14,6 +15,7 @@ import banco.Cuenta;
 public class ControladorCuenta {
     private VistaConsolaCuenta vista;
     private Cuenta modelo;
+    private DataBase tabla;
 
     public void setVista(VistaConsolaCuenta vista) {
         this.vista = vista;
