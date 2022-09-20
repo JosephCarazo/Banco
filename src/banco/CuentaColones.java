@@ -12,10 +12,7 @@ public class CuentaColones extends Cuenta {
 
     public CuentaColones(String numeroCuenta, double saldo) {
         super(numeroCuenta, saldo);
-        
+
     }//crear constructor  saldo
 
-
-   
-    
 }

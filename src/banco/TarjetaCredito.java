@@ -6,8 +6,6 @@ package banco;
 
 import java.time.LocalDate;
 
-
-
 /**
  *
  * @author Francisco
@@ -58,6 +56,7 @@ public class TarjetaCredito extends Tarjeta {
     public void generarNumeroTarjeta() {
         super.generarNumeroTarjeta();
     }
+
     public void calcularFechaCorte(int cantidadDeDias) {
         String fechaC = String.valueOf(LocalDate.now().plusDays(cantidadDeDias));
         this.fechaCorte = fechaC;
@@ -65,8 +64,7 @@ public class TarjetaCredito extends Tarjeta {
 
     @Override
     public String toString() {
-        return "*** Tarjeta Credito ***" + "\nNumero tarjeta: " + this.numeroTarjeta + "\nCuenta: " + this.cuenta +"\nFecha Corte: " + fechaCorte + "\nSaldo: " + saldo + "\nLimite: " + limite;
+        return "*** Tarjeta Credito ***" + "\nNumero tarjeta: " + this.numeroTarjeta + "\nCuenta: " + this.cuenta + "\nFecha Corte: " + fechaCorte + "\nSaldo: " + saldo + "\nLimite: " + limite;
     }
 
-    
 }
