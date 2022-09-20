@@ -52,7 +52,12 @@ public class VistaConsolaCuenta {
     }else{
 System.out.println("Cuenta Dolares");
 }
-        System.out.println("Numero de cuenta "+cuenta.getNumeroCuenta());
-        System.out.println("Saldo "+cuenta.getSaldo());   
+        System.out.println("Numero de cuenta: "+cuenta.getNumeroCuenta());
+        System.out.println("Saldo: "+cuenta.getSaldo());   
 }
+    
+    public void error(String mensaje){
+        System.out.println("Error "+mensaje); 
+    
+    }
 }

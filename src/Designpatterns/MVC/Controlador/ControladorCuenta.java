@@ -35,6 +35,8 @@ public class ControladorCuenta {
     public void agregar(){
     if (tabla.Buscar(modelo.getNumeroCuenta())==null){
         tabla.add(modelo);
+    }else{
+    vista.error("Numero de cuenta ya existe");
     }
     }
     
@@ -42,8 +44,10 @@ public class ControladorCuenta {
     Cuenta cuenta = tabla.Buscar(modelo.getNumeroCuenta());
     if (cuenta==null){
     //Vista Indicar error
+    vista.error("La cuenta no existe");
     }else{
     //Vista Muestre cuenta
+    vista.mostrar(cuenta);
     }
     }
     
