@@ -46,7 +46,7 @@ public class VistaConsolaCuenta {
         System.out.println("Ingrese el numero de cuenta");
         String numero = leer.nextLine();
 
-        Cuenta cuenta = new CuentaColones(numero);
+        Cuenta cuenta = new CuentaColones(numero,500);
         controlCuenta.setModelo(cuenta);
         controlCuenta.buscar();
 

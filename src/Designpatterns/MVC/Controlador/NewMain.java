@@ -17,9 +17,8 @@ public class NewMain {
      */
     public static void main(String[] args) {
         VistaConsolaCuenta vista = new VistaConsolaCuenta();
-        vista.agregar();
-        vista.agregar();
-        vista.agregar();
+       
+        vista.buscar();
     }
 
 }
