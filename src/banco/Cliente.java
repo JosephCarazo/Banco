@@ -69,6 +69,10 @@ public class Cliente {
         this.tarjetaCredito = tarjetaCredito;
     }
 
+    public ArrayList<Cuenta> getCuentas() {
+        return cuentas;
+    }
+
     public Cliente(String cedula, String nombre, String fechaNacimiento, String telefono, String correo, boolean tarjetaCredito) {
         this.cedula = cedula;
         this.nombre = nombre;

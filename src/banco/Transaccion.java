@@ -92,7 +92,7 @@ public abstract class Transaccion {
 
     @Override
     public String toString() {
-        return "Transaccion{" + "id=" + id + ", cuenta=" + cuenta + ", monto=" + monto + ", saldoAnterior=" + saldoAnterior + ", saldoFinal=" + saldoFinal + ", fechaHora=" + fechaHora + '}';
+        return "Transaccion{" + " \nId=" + id + "\n Cuenta=" + cuenta + "\n Monto=" + monto + "\n SaldoAnterior=" + saldoAnterior + "\n SaldoFinal=" + saldoFinal + "\n FechaHora=" + fechaHora + '}';
     }
 
 }
