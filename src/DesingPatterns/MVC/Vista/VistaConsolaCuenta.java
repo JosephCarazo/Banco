@@ -8,6 +8,7 @@ import Designpatterns.MVC.Controlador.ControladorCuenta;
 import Designpatterns.MVC.MODELO.Cuenta;
 import Designpatterns.MVC.MODELO.CuentaColones;
 import Designpatterns.MVC.MODELO.CuentaDolares;
+import Designpatterns.MVC.MODELO.DataBase;
 import java.util.Scanner;
 
 /**
@@ -16,6 +17,18 @@ import java.util.Scanner;
  */
 public class VistaConsolaCuenta {
     private ControladorCuenta controlCuenta;
+
+    public VistaConsolaCuenta() {
+        this.controlCuenta=new ControladorCuenta(this,null,new DataBase());
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     
     public void agregar(){
      Scanner leer = new Scanner(System.in);

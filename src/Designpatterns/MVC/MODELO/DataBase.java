@@ -24,5 +24,9 @@ public class DataBase {
      }
      return null;
      }
+
+    public DataBase() {
+        this.cuentas = new ArrayList<Cuenta>();
+    }
      
 }
