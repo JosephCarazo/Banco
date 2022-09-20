@@ -29,8 +29,7 @@ public class VistaConsolaCuenta {
         String numero = leer.nextLine();
         System.out.println("Ingrese el saldo");
         double saldo = leer.nextDouble();
-        System.out.println("1 para cuentaEncolones");
-        System.out.println("2 para cuentaEncolones");
+        System.out.println("1 -> Cuenta en colones\n2 -> Cuenta en dolares");
         int tipo = leer.nextInt();
         Cuenta cuenta;
         if (tipo == 1) {
@@ -65,7 +64,7 @@ public class VistaConsolaCuenta {
     }
 
     public void error(String mensaje) {
-        System.out.println("Error " + mensaje);
+        System.out.println("Error: " + mensaje);
 
     }
 }
