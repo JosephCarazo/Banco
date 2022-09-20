@@ -17,6 +17,10 @@ public class CuentaColones extends Cuenta {
         
     }//crear constructor  saldo
 
+    public CuentaColones(String numero) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 
    
     
