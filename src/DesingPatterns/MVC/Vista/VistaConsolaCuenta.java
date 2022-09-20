@@ -45,4 +45,14 @@ public class VistaConsolaCuenta {
      controlCuenta.buscar();
      
     }
+    public void mostrar (Cuenta cuenta){
+        if (cuenta instanceof CuentaColones){
+        System.out.println("Cuenta colones ");
+        
+    }else{
+System.out.println("Cuenta Dolares");
+}
+        System.out.println("Numero de cuenta "+cuenta.getNumeroCuenta());
+        System.out.println("Saldo "+cuenta.getSaldo());   
+}
 }
