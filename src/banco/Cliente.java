@@ -69,7 +69,9 @@ public class Cliente {
         this.tarjetaCredito = tarjetaCredito;
     }
 
+
     public Cliente(String cedula, String nombre, String fechaNacimiento, String telefono, String correo, TarjetaCredito tarjetaCredito) {
+
         this.cedula = cedula;
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;

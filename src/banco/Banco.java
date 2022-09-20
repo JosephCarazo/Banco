@@ -19,7 +19,7 @@ public class Banco {
 
     private static ArrayList<Cliente> cliente = new ArrayList<>();
     private static int contDepositos;
-
+    
     protected static ArrayList<Transferencia> transferencia = new ArrayList<>();
     protected static ArrayList<Deposito> depositos = new ArrayList<>();
     protected static ArrayList<Retiro> retiros = new ArrayList<>();
@@ -206,16 +206,16 @@ public class Banco {
         Scanner leer = new Scanner(System.in);
         System.out.println("\nDigite una opcion\n1- Crear cuenta Colones\n2- Crear cuenta Dolares\n3- Salir");
         int op = leer.nextInt();
-        long dig16 = 0;//Se guarda el numero aleatorio para la cuenta
+        
         double saldo = 0;
 
         switch (op) {
             case 1:
                
-                cuentaColones(dig16, saldo);
+                cuentaColones(saldo);
                 menuPrincipal();
             case 2:
-                cuentaDolares(dig16, saldo);
+                cuentaDolares(saldo);
                 menuPrincipal();
             case 3:
                 menuPrincipal();
@@ -388,18 +388,28 @@ public class Banco {
         return nCuenta;
     }
 
-    public static void cuentaDolares(long dig16, double saldo) {
+    public static void cuentaDolares( double saldo) {
         Scanner leer = new Scanner(System.in);
+        Cliente cli= new Cliente();
         System.out.println("Escriba la cedula del cliente");
         String cliente = leer.nextLine();
+        String nCuenta="";
         if (buscarCliente(cliente)) {
             System.out.println("\nIngrese el monto inicial de la cuenta");
             saldo = leer.nextDouble();
-            String nCuenta = generaNumeroCuenta();
+            nCuenta = generaNumeroCuenta();
+            for (int i = 0; i < cli.cuentas.size(); i++) {
+                if(cli.cuentas.get(i).getNumeroCuenta().equals(nCuenta)){
+                    System.out.println("\nEl numero de cuenta ya existe se generara otro");
+                    cuentaDolares(saldo);
+                }else{
+                     nCuenta= generaNumeroCuenta();
+                }
+            }
+            
             CuentaDolares dolares = new CuentaDolares(nCuenta, saldo);
             retornarCliente(cliente).setCuentas(dolares);
             
-
             System.out.println("**********Cuenta Creada***********");
             System.out.println("Numero Cuenta = " + dolares.getNumeroCuenta());
             System.out.println("Saldo Disponible = " + dolares.getSaldo() + " dolares\n");
@@ -408,14 +418,23 @@ public class Banco {
         }
     }
 
-    public static void cuentaColones(long dig16, double saldo) {
+    public static void cuentaColones(double saldo) {
         Scanner leer = new Scanner(System.in);
+        Cliente cli=new Cliente();
         System.out.println("Escriba el numero de cédula cliente");
         String cliente = leer.nextLine();
         if (buscarCliente(cliente)) {
             System.out.println("\nIngrese el monto inicial de la cuenta");
             saldo = leer.nextDouble();
             String nCuenta = generaNumeroCuenta();
+            for (int i = 0; i < cli.cuentas.size(); i++) {
+                if(cli.cuentas.get(i).getNumeroCuenta().equals(nCuenta)){
+                    System.out.println("\nEl numero de cuenta ya existe se generara otro");
+                    cuentaDolares(saldo);
+                }else{
+                     nCuenta= generaNumeroCuenta();
+                }
+            }
             CuentaColones colones = new CuentaColones(nCuenta, saldo);
             retornarCliente(cliente).setCuentas(colones);
 
@@ -463,7 +482,7 @@ public class Banco {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        menuPrincipal();
+        menuPrincipal();
         Tarjeta tj = new TarjetaCredito();
         System.out.println(tj);
     }
