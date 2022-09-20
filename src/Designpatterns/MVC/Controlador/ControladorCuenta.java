@@ -8,12 +8,12 @@ import Designpatterns.MVC.MODELO.Cuenta;
 import Designpatterns.MVC.MODELO.DataBase;
 import DesingPatterns.MVC.Vista.VistaConsolaCuenta;
 
-
 /**
  *
  * @author joans
  */
 public class ControladorCuenta {
+
     private VistaConsolaCuenta vista;
     private Cuenta modelo;
     private DataBase tabla;
@@ -31,24 +31,24 @@ public class ControladorCuenta {
         this.modelo = modelo;
         this.tabla = tabla;
     }
-    
-    public void agregar(){
-    if (tabla.Buscar(modelo.getNumeroCuenta())==null){
-        tabla.add(modelo);
-    }else{
-    vista.error("Numero de cuenta ya existe");
+
+    public void agregar() {
+        if (tabla.Buscar(modelo.getNumeroCuenta()) == null) {
+            tabla.add(modelo);
+        } else {
+            vista.error("Numero de cuenta ya existe");
+        }
     }
+
+    public void buscar() {
+        Cuenta cuenta = tabla.Buscar(modelo.getNumeroCuenta());
+        if (cuenta == null) {
+            //Vista Indicar error
+            vista.error("La cuenta no existe");
+        } else {
+            //Vista Muestre cuenta
+            vista.mostrar(cuenta);
+        }
     }
-    
-    public void buscar(){
-    Cuenta cuenta = tabla.Buscar(modelo.getNumeroCuenta());
-    if (cuenta==null){
-    //Vista Indicar error
-    vista.error("La cuenta no existe");
-    }else{
-    //Vista Muestre cuenta
-    vista.mostrar(cuenta);
-    }
-    }
-    
+
 }
