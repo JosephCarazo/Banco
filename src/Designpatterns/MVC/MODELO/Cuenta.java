@@ -11,22 +11,22 @@ import banco.*;
  * @author joans
  */
 public class Cuenta {
-   
-   protected String numeroCuenta;
-   protected double saldo;
+
+    protected String numeroCuenta;
+    protected double saldo;
 
     public Cuenta(String numeroCuenta, double saldo) {
         this.numeroCuenta = numeroCuenta;
         this.saldo = saldo;
     }
-    
-    public Cuenta(String numeroCuenta){
-        this.numeroCuenta=numeroCuenta;
+
+    public Cuenta(String numeroCuenta) {
+        this.numeroCuenta = numeroCuenta;
     }
 
     public Cuenta() {
     }
-    
+
     public String getNumeroCuenta() {
         return numeroCuenta;
     }
@@ -34,7 +34,6 @@ public class Cuenta {
 //    public void setNumeroCuenta(String numeroCuenta) {
 //        this.numeroCuenta = numeroCuenta;
 //    }
-
     public double getSaldo() {
         return saldo;
     }
@@ -42,15 +41,14 @@ public class Cuenta {
     public void setSaldo(double saldo) {
         if (this.saldo < 0) {
             this.saldo = 0;
-        }else{
+        } else {
             this.saldo = saldo;
         }
     }
 
     @Override
     public String toString() {
-        return  "\n"+'['+" Numero Cuenta: " + numeroCuenta + ']'+"\n"+  '['+ "Saldo Disponible: " + saldo + ']';
+        return "\n" + '[' + " Numero Cuenta: " + numeroCuenta + ']' + "\n" + '[' + "Saldo Disponible: " + saldo + ']';
     }
-   
-  
+
 }

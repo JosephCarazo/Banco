@@ -11,22 +11,24 @@ import java.util.ArrayList;
  * @author joans
  */
 public class DataBase {
-     private ArrayList<Cuenta> cuentas;
-     
-     public void add(Cuenta cuenta){
-     cuentas.add(cuenta);
-     }
-     public Cuenta Buscar(String numero){
-     for (Cuenta cuenta: cuentas){
-     if(cuenta.getNumeroCuenta().equals(numero)){
-     return cuenta;
-     }
-     }
-     return null;
-     }
+
+    private ArrayList<Cuenta> cuentas;
+
+    public void add(Cuenta cuenta) {
+        cuentas.add(cuenta);
+    }
+
+    public Cuenta Buscar(String numero) {
+        for (Cuenta cuenta : cuentas) {
+            if (cuenta.getNumeroCuenta().equals(numero)) {
+                return cuenta;
+            }
+        }
+        return null;
+    }
 
     public DataBase() {
         this.cuentas = new ArrayList<Cuenta>();
     }
-     
+
 }
